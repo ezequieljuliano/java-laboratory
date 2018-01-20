@@ -1,0 +1,72 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:b="http://bootsfaces.net/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:x="http://java.sun.com/jsf/composite/components"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:sec="http://www.springframework.org/security/tags"
+                template="main.xhtml">
+    <ui:define name="body">
+        <sec:authorize access="hasRole('ROLE_ADMIN')">
+            <b:form id="userViewForm">            
+                <b:container>
+                    <x:viewMenu controller="#{userController}" />
+                    <x:viewContent title="Usuário">
+                        <b:row>
+                            <b:column>
+                                <b:inputText value="#{userController.record.username}" label="Usuário" placeholder="Usuário" />                            
+                            </b:column> 
+                            <b:column>
+                                <b:inputSecret value="#{userController.password}" label="Senha" placeholder="Senha" /> 
+                            </b:column> 
+                            <b:column>
+                                <b:inputSecret value="#{userController.passwordConfirmation}" label="Confirmação" placeholder="Confirmação" /> 
+                            </b:column> 
+                            <b:column>
+                                <b:inputText value="#{userController.record.name}" label="Nome" placeholder="Nome" />                            
+                            </b:column> 
+                            <b:column>
+                                <b:inputText value="#{userController.record.email}" label="E-mail" placeholder="E-mail" />                            
+                            </b:column> 
+                            <b:column>            
+                                <b:selectOneMenu value="#{userController.record.status}" label="Situação">        
+                                    <f:selectItems value="#{userController.status}" var="status" itemLabel="#{status.text}" itemValue="#{status}" />
+                                </b:selectOneMenu>          
+                            </b:column>                      
+                        </b:row>
+                        <b:panel title="Perfis de Acesso" collapsible="false">
+                            <b:row>
+                                <b:column small-screen="8">
+                                    <b:inputText value="#{userController.roleInformation}" placeholder="Perfil" 
+                                                 typeahead="true" typeahead-values="#{userController.rolesList}">
+                                        <f:facet name="append">
+                                            <b:icon name="search" /> 
+                                        </f:facet>
+                                    </b:inputText>
+                                </b:column>
+                                <b:column small-screen="4">
+                                    <b:commandButton value="Adicionar Perfil" style="width:100%"  
+                                                     icon="plus" look="primary" update="@form"
+                                                     actionListener="#{userController.addRole()}" />                                    
+                                </b:column>
+                            </b:row>
+                            <b:row style="margin-top: 10px">
+                                <b:column style="width:100%" >
+                                    <b:dataTable style="width:100%"  value="#{userController.record.roles}" var="role" 
+                                                 responsive="true" paginated="false" searching="false" info="false" 
+                                                 customLangUrl="#{messages['app.datatable.lang']}">          
+                                        <b:dataTableColumn label="Descrição" value="#{role.description}" />
+                                        <b:dataTableColumn label="Excluir" style="width: 45px; min-width: 45px" orderable="false">
+                                            <b:commandButton value="Excluir"
+                                                             icon="trash" look="danger" size="xs" update="@form"
+                                                             actionListener="#{userController.removeRole(role)}" />
+                                        </b:dataTableColumn>
+                                    </b:dataTable> 
+                                </b:column>
+                            </b:row>
+                        </b:panel>
+                    </x:viewContent>              
+                </b:container>
+            </b:form>
+        </sec:authorize>
+    </ui:define>
+</ui:composition>

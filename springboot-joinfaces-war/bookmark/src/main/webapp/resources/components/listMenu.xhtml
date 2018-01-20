@@ -1,0 +1,28 @@
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:composite="http://java.sun.com/jsf/composite"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui">
+
+    <composite:interface>
+        <composite:attribute name="controller" required="true" />
+    </composite:interface>
+
+    <composite:implementation>
+        <b:growl show-summary="false" show-detail="true"/>
+        <b:row style="padding-bottom: 5px">
+            <b:column>
+                <b:buttonGroup>
+                    <b:commandButton value="Adicionar Novo" style="width:175px" 
+                                     icon="plus" look="primary"
+                                     action="#{cc.attrs.controller.insert()}" />
+                    <b:commandButton value="Atualizar Listagem" 
+                                     icon="refresh" style="width:175px"
+                                     actionListener="#{cc.attrs.controller.refreshList()}">
+                        <f:ajax render="@form"/>      
+                    </b:commandButton>
+                    <composite:insertChildren />
+                </b:buttonGroup>
+            </b:column>
+        </b:row>        
+    </composite:implementation>
+</html>

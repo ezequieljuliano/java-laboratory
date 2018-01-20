@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <title>#{messages['app.name']}</title> 
+        <style type="text/css">
+            .form-signin {
+                margin: 0 auto;
+                max-width: 500px;
+                padding: 15px;
+            }
+        </style>
+    </h:head>
+
+    <h:body style="padding-top: 60px;">
+        <b:container>
+            <h:form id="loginForm" styleClass="form-signin" prependId="false">
+                <h:outputLabel style="color: red" value="Falha na autenticação: o usuário e/ou a senha estão incorretos." rendered="#{!empty param['error']}"/>
+                <b:panel title="Acesse com suas Credenciais" collapsible="false">              
+                    <b:inputText id="username" fieldId="username" name="username" placeholder="Usuário" required="true" fieldSize="lg">
+                        <f:facet name="prepend">
+                            <b:icon name="user" />
+                        </f:facet>
+                    </b:inputText>
+                    <b:inputSecret id="password" fieldId="password" name="password" placeholder="Senha" required="true" fieldSize="lg">
+                        <f:facet name="prepend">
+                            <b:iconAwesome name="key" />
+                        </f:facet>
+                    </b:inputSecret>
+                    <b:commandButton id="submit" look="primary btn-block" value="Entrar" icon="log-in" size="lg"/>        
+                </b:panel>
+            </h:form>
+        </b:container>
+    </h:body>
+</html>
+

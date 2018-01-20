@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets" 
+      xmlns:b="http://bootsfaces.net/ui">
+
+    <h:head>
+        <title>#{messages['app.name']}</title> 
+    </h:head>
+
+    <h:body>
+        <div id="content">
+            <div id="header">
+                <div id="menu">
+                    <ui:include src="/menu.xhtml" />
+                </div>
+            </div>
+            <div id="content">
+                <ui:insert name="body" />
+            </div>            
+            <div id="footer">
+                <b:container>
+                    <footer>
+                        <p>#{messages['app.footer.text']} | #{messages['app.footer.version']}</p>           
+                    </footer>
+                </b:container>
+            </div>
+        </div>
+    </h:body>
+</html>
+
