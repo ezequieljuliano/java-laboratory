@@ -1,0 +1,32 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:b="http://bootsfaces.net/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:x="http://java.sun.com/jsf/composite/components"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="main.xhtml"                >
+    <ui:define name="body">
+        <b:form id="bookmarkViewForm">            
+            <b:container>
+                <x:viewMenu controller="#{bookmarkController}" />
+                <x:viewContent title="Bookmark">
+                    <b:row>
+                        <b:column>
+                            <b:inputText value="#{bookmarkController.record.description}" label="Descrição" placeholder="Descrição" />                            
+                        </b:column> 
+                        <b:column>
+                            <b:inputText value="#{bookmarkController.record.link}" label="Link" placeholder="Link" />
+                        </b:column>
+                        <b:column>
+                            <b:inputText value="#{bookmarkController.categoryInformation}" label="Categoria" placeholder="Categoria"
+                                         typeahead="true" typeahead-values="#{bookmarkController.categoriesList}">
+                                <f:facet name="append">
+                                    <b:icon name="search" /> 
+                                </f:facet>
+                            </b:inputText>
+                        </b:column>
+                    </b:row>
+                </x:viewContent>              
+            </b:container>
+        </b:form>
+    </ui:define>
+</ui:composition>

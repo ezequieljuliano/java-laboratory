@@ -1,0 +1,50 @@
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:composite="http://java.sun.com/jsf/composite"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui">
+
+    <composite:interface>
+        <composite:attribute name="controller" required="true" />
+    </composite:interface>
+
+    <composite:implementation>
+        <b:growl severity="info,warn" show-summary="false" show-detail="true"/>
+        <b:row style="padding-bottom: 5px">
+            <b:column>
+                <b:buttonGroup>
+                    <b:commandButton value="Voltar" style="width:100px"
+                                     icon="chevron-left" immediate="true" 
+                                     action="#{cc.attrs.controller.getListPage()}"/>
+                    <b:commandButton value="Atualizar" style="width:100px"
+                                     icon="refresh" rendered="#{cc.attrs.controller.updateMode}"
+                                     actionListener="#{cc.attrs.controller.refreshRecord()}">
+                        <f:ajax render="@form"/> 
+                    </b:commandButton>
+                    <b:commandButton value="Adicionar" style="width:100px"
+                                     icon="plus" look="primary" 
+                                     action="#{cc.attrs.controller.insert()}"
+                                     rendered="#{cc.attrs.controller.updateMode}"/>
+                    <b:commandButton value="Salvar" style="width:100px"
+                                     icon="floppy-disk" look="success"
+                                     actionListener="#{cc.attrs.controller.save()}">
+                        <f:ajax execute="@form" render="@form"/>
+                    </b:commandButton>
+                    <b:modal id="deleteConfirmModal" title="Exclusão de Registro" styleClass="deleteConfirmModalClass">
+                        <p>Tem certeza que deseja excluir o registro?</p>
+                        <f:facet name="footer">
+                            <b:button value="Não" dismiss="modal" />
+                            <b:commandButton value="Sim" look="primary" 
+                                             onclick="$('.deleteConfirmModalClass').modal('hide');"
+                                             action="#{cc.attrs.controller.delete()}"/>            
+                        </f:facet> 
+                    </b:modal>
+                    <b:commandButton value="Excluir" style="width:100px"
+                                     icon="trash" look="danger" 
+                                     onclick="$('.deleteConfirmModalClass').modal('show');return false;"
+                                     rendered="#{cc.attrs.controller.updateMode}"/>
+                    <composite:insertChildren />
+                </b:buttonGroup>
+            </b:column>
+        </b:row>
+    </composite:implementation>
+</html>

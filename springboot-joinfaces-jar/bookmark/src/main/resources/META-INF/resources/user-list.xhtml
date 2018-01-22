@@ -1,0 +1,23 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:b="http://bootsfaces.net/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets" 
+                xmlns:x="http://java.sun.com/jsf/composite/components"
+                xmlns:sec="http://www.springframework.org/security/tags"
+                template="main.xhtml">
+    <ui:define name="body">
+        <sec:authorize access="hasRole('ROLE_ADMIN')">
+            <b:form id="userListForm">            
+                <b:container>
+                    <x:listMenu controller="#{userController}" />
+                    <x:listDataSet controller="#{userController}" title="Usuários" >
+                        <b:dataTableColumn label="Usuário" value="#{record.username}" />
+                        <b:dataTableColumn label="Nome" value="#{record.name}" />
+                        <b:dataTableColumn label="E-mail" value="#{record.email}" />
+                        <b:dataTableColumn label="Situação" value="#{record.status.text}" />
+                        <b:dataTableColumn label="Perfis" value="#{record.rolesDescriptions}" />
+                    </x:listDataSet>
+                </b:container>
+            </b:form>
+        </sec:authorize>
+    </ui:define>
+</ui:composition>
