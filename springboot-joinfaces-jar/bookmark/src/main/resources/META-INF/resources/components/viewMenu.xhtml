@@ -17,7 +17,7 @@
                                      action="#{cc.attrs.controller.getListPage()}"/>
                     <b:commandButton value="Atualizar" style="width:100px"
                                      icon="refresh" rendered="#{cc.attrs.controller.updateMode}"
-                                     actionListener="#{cc.attrs.controller.refreshRecord()}">
+                                     actionListener="#{cc.attrs.controller.refreshEntity()}">
                         <f:ajax render="@form"/> 
                     </b:commandButton>
                     <b:commandButton value="Adicionar" style="width:100px"

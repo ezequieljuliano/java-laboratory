@@ -12,6 +12,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public abstract class CrudController<T, R extends JpaRepository<T, Long>> implements Serializable {
@@ -21,28 +22,29 @@ public abstract class CrudController<T, R extends JpaRepository<T, Long>> implem
     private MessageContext messageContext;
 
     @Autowired
+    @Lazy
     @Getter(AccessLevel.PROTECTED)
     private R repository;
 
-    private List<T> dataSet;
+    private List<T> list;
 
-    private T record;
+    private T entity;
 
     private Long id;
 
     @Getter
     @Setter
-    private T selected;
+    private T selection;
 
     private String viewPage;
 
     private String listPage;
 
-    private Long getRecordIdValue(T record) {
+    private Long getIdValue(T entity) {
         try {
-            Method getIdMethod = record.getClass().getMethod("getId");
+            Method getIdMethod = entity.getClass().getMethod("getId");
             if (getIdMethod != null) {
-                return (Long) getIdMethod.invoke(record);
+                return (Long) getIdMethod.invoke(entity);
             }
         } catch (Exception e) {
             Logger.getLogger(CrudController.class.getName()).log(Level.SEVERE, null, e);
@@ -51,10 +53,10 @@ public abstract class CrudController<T, R extends JpaRepository<T, Long>> implem
         return null;
     }
 
-    private T createRecord() {
+    private T createEntity() {
         try {
-            Class<T> recordClass = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
-            return recordClass.newInstance();
+            Class<T> entityClass = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+            return entityClass.newInstance();
         } catch (Exception e) {
             Logger.getLogger(CrudController.class.getName()).log(Level.SEVERE, null, e);
             messageContext.add(e.getMessage());
@@ -70,12 +72,24 @@ public abstract class CrudController<T, R extends JpaRepository<T, Long>> implem
         return repository.getOne(id);
     }
 
-    protected void onSave(T record) {
-        repository.save(record);
+    protected void beforeSave(T entity) {
     }
 
-    protected void onDelete(T record) {
-        repository.delete(record);
+    protected void afterSave(T entity) {
+    }
+
+    protected void delegateSave(T entity) {
+        repository.save(entity);
+    }
+
+    protected void beforeDelete(T entity) {
+    }
+
+    protected void afterDelete(T entity) {
+    }
+
+    protected void delegateDelete(T entity) {
+        repository.delete(entity);
     }
 
     public String getViewPage() {
@@ -111,40 +125,42 @@ public abstract class CrudController<T, R extends JpaRepository<T, Long>> implem
         }
     }
 
-    public List<T> getDataSet() {
-        if (dataSet == null) {
-            dataSet = findAll();
+    public List<T> getList() {
+        if (list == null) {
+            list = findAll();
         }
-        return dataSet;
+        return list;
     }
 
-    public T getRecord() {
-        if (record == null) {
+    public T getEntity() {
+        if (entity == null) {
             if (id != null) {
-                record = findOne(id);
+                entity = findOne(id);
             } else {
-                record = createRecord();
+                entity = createEntity();
             }
         }
-        return record;
+        return entity;
     }
 
     public String insert() {
-        record = createRecord();
+        entity = createEntity();
         id = null;
         return getViewPage();
     }
 
-    public String edit(T record) {
-        this.record = record;
-        id = getRecordIdValue(this.record);
+    public String edit(T entity) {
+        this.entity = entity;
+        id = getIdValue(this.entity);
         return getViewPage().concat("&id=").concat(id.toString());
     }
 
     public void save() {
         try {
-            onSave(getRecord());
-            id = getRecordIdValue(getRecord());
+            beforeSave(getEntity());
+            delegateSave(getEntity());
+            afterSave(getEntity());
+            id = getIdValue(getEntity());
             messageContext.add("Registro salvo com sucesso.", MessageSeverity.INFO);
         } catch (Exception e) {
             messageContext.add("Ocorreu um erro ao salvar o registro: {0}", MessageSeverity.ERROR, e.getMessage());
@@ -153,7 +169,9 @@ public abstract class CrudController<T, R extends JpaRepository<T, Long>> implem
 
     public String delete() {
         try {
-            onDelete(getRecord());
+            beforeDelete(getEntity());
+            delegateDelete(getEntity());
+            afterDelete(getEntity());
             messageContext.add("Registro excluído com sucesso.", MessageSeverity.WARN);
         } catch (Exception e) {
             messageContext.add("Ocorreu um erro ao excluir o registro: {0}", MessageSeverity.ERROR, e.getMessage());
@@ -161,10 +179,12 @@ public abstract class CrudController<T, R extends JpaRepository<T, Long>> implem
         return getListPage();
     }
 
-    public void delete(T record) {
+    public void delete(T entity) {
         try {
-            onDelete(record);
-            getDataSet().remove(record);
+            beforeDelete(entity);
+            delegateDelete(entity);
+            getList().remove(entity);
+            afterDelete(entity);
             messageContext.add("Registro excluído com sucesso.", MessageSeverity.WARN);
         } catch (Exception e) {
             messageContext.add("Ocorreu um erro ao excluir o registro: {0}", MessageSeverity.ERROR, e.getMessage());
@@ -172,12 +192,12 @@ public abstract class CrudController<T, R extends JpaRepository<T, Long>> implem
     }
 
     public void refreshList() {
-        dataSet = findAll();
+        list = findAll();
     }
 
-    public void refreshRecord() {
+    public void refreshEntity() {
         if (id != null) {
-            record = findOne(id);
+            entity = findOne(id);
         }
     }
 

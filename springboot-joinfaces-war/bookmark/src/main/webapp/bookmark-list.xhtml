@@ -8,9 +8,9 @@
             <b:container>
                 <x:listMenu controller="#{bookmarkController}" />
                 <x:listDataSet controller="#{bookmarkController}" title="Bookmarks" >
-                    <b:dataTableColumn label="Descrição" value="#{record.description}" />
-                    <b:dataTableColumn label="Link" value="#{record.link}" />
-                    <b:dataTableColumn label="Categoria" value="#{record.category.name}" />
+                    <b:dataTableColumn label="Descrição" value="#{entity.description}" />
+                    <b:dataTableColumn label="Link" value="#{entity.link}" />
+                    <b:dataTableColumn label="Categoria" value="#{entity.category.name}" />
                 </x:listDataSet>
             </b:container>
         </b:form>

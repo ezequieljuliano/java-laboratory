@@ -15,7 +15,7 @@
                 <b:button value="Não" dismiss="modal" />
                 <b:commandButton value="Sim" look="primary" 
                                  onclick="$('.deleteConfirmModalClass').modal('hide');"
-                                 actionListener="#{cc.attrs.controller.delete(cc.attrs.controller.selected)}"> 
+                                 actionListener="#{cc.attrs.controller.delete(cc.attrs.controller.selection)}"> 
                     <f:ajax render="@form"/>
                 </b:commandButton>              
             </f:facet> 
@@ -23,7 +23,7 @@
         <b:row>
             <b:column>
                 <b:panel title="#{cc.attrs.title}" collapsible="false">
-                    <b:dataTable value="#{cc.attrs.controller.dataSet}" var="record" 
+                    <b:dataTable value="#{cc.attrs.controller.list}" var="entity" 
                                  responsive="true" style="width:100%" 
                                  customLangUrl="#{messages['app.datatable.lang']}">
                         <composite:insertChildren />              
@@ -31,14 +31,14 @@
                                            data-search="false" orderable="false">
                             <b:commandButton value="Editar" 
                                              icon="pencil" look="warning" size="xs"
-                                             action="#{cc.attrs.controller.edit(record)}"/>
+                                             action="#{cc.attrs.controller.edit(entity)}"/>
                         </b:dataTableColumn>                                                 
                         <b:dataTableColumn label="Excluir" style="width: 45px; min-width: 45px" 
                                            data-search="false" orderable="false">
                             <b:commandButton value="Excluir"
                                              icon="trash" look="danger" size="xs" ajax="true"
                                              oncomplete="$('.deleteConfirmModalClass').modal();">
-                                <f:setPropertyActionListener value="#{record}" target="#{cc.attrs.controller.selected}" />
+                                <f:setPropertyActionListener value="#{entity}" target="#{cc.attrs.controller.selection}" />
                             </b:commandButton>                                                           
                         </b:dataTableColumn>
                     </b:dataTable> 

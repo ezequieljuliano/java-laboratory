@@ -5,6 +5,7 @@ import com.ezequieljuliano.bookmark.entities.User;
 import com.ezequieljuliano.bookmark.entities.enums.UserStatus;
 import com.ezequieljuliano.bookmark.repositories.RoleRepository;
 import com.ezequieljuliano.bookmark.repositories.UserRepository;
+import com.ezequieljuliano.bookmark.services.UserService;
 import com.ezequieljuliano.bookmark.utilities.CrudController;
 import com.ezequieljuliano.bookmark.utilities.MessageSeverity;
 import com.ezequieljuliano.bookmark.utilities.PageList;
@@ -27,6 +28,9 @@ public class UserController extends CrudController<User, UserRepository> {
     @Autowired
     private RoleRepository roleRepository;
 
+    @Autowired
+    private UserService userService;
+
     @Getter
     @Setter
     private String password;
@@ -40,7 +44,27 @@ public class UserController extends CrudController<User, UserRepository> {
     private String roleInformation;
 
     @Override
-    protected void onSave(User user) {
+    protected List<User> findAll() {
+        return userService.findAll();
+    }
+
+    @Override
+    protected User findOne(Long id) {
+        return userService.getOne(id);
+    }
+
+    @Override
+    protected void delegateSave(User entity) {
+        userService.save(entity);
+    }
+
+    @Override
+    protected void delegateDelete(User entity) {
+        userService.delete(entity);
+    }
+
+    @Override
+    protected void beforeSave(User entity) {
         if (!isUpdateMode()) {
             if (Strings.isEmpty(password)) {
                 throw new ViewException("Você deve informar uma senha.");
@@ -53,11 +77,10 @@ public class UserController extends CrudController<User, UserRepository> {
             if (!password.equals(passwordConfirmation)) {
                 throw new ViewException("A senha informada não confere com a confirmação.");
             }
-            user.setPassword(password);
+            entity.setPassword(password);
         }
         password = null;
         passwordConfirmation = null;
-        super.onSave(user);
     }
 
     public UserStatus[] getStatus() {
@@ -72,8 +95,8 @@ public class UserController extends CrudController<User, UserRepository> {
         try {
             if (!Strings.isEmpty(roleInformation)) {
                 Role role = roleRepository.getOne(Strings.getId(roleInformation));
-                if (!getRecord().containsRole(role)) {
-                    getRecord().getRoles().add(role);
+                if (!getEntity().containsRole(role)) {
+                    getEntity().getRoles().add(role);
                 } else {
                     getMessageContext().add("Este perfil já está adicionado para este usuário.", MessageSeverity.WARN);
                 }
@@ -89,7 +112,7 @@ public class UserController extends CrudController<User, UserRepository> {
     public void removeRole(Role role) {
         try {
             if (role != null) {
-                getRecord().getRoles().remove(role);
+                getEntity().getRoles().remove(role);
             }
         } catch (Exception e) {
             getMessageContext().add("Ocorreu um erro ao remover o perfil: {0}", MessageSeverity.ERROR, e.getMessage());

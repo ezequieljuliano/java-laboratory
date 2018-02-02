@@ -10,8 +10,8 @@
                 <b:container>
                     <x:listMenu controller="#{roleController}" />
                     <x:listDataSet controller="#{roleController}" title="Perfis" >
-                        <b:dataTableColumn label="Nome" value="#{record.name}" />
-                        <b:dataTableColumn label="Descrição" value="#{record.description}" />
+                        <b:dataTableColumn label="Nome" value="#{entity.name}" />
+                        <b:dataTableColumn label="Descrição" value="#{entity.description}" />
                     </x:listDataSet>
                 </b:container>
             </b:form>

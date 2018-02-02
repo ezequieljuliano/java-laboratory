@@ -13,7 +13,7 @@
                     <x:viewContent title="Usuário">
                         <b:row>
                             <b:column>
-                                <b:inputText value="#{userController.record.username}" label="Usuário" placeholder="Usuário" />                            
+                                <b:inputText value="#{userController.entity.username}" label="Usuário" placeholder="Usuário" />                            
                             </b:column> 
                             <b:column>
                                 <b:inputSecret value="#{userController.password}" label="Senha" placeholder="Senha" /> 
@@ -22,13 +22,13 @@
                                 <b:inputSecret value="#{userController.passwordConfirmation}" label="Confirmação" placeholder="Confirmação" /> 
                             </b:column> 
                             <b:column>
-                                <b:inputText value="#{userController.record.name}" label="Nome" placeholder="Nome" />                            
+                                <b:inputText value="#{userController.entity.name}" label="Nome" placeholder="Nome" />                            
                             </b:column> 
                             <b:column>
-                                <b:inputText value="#{userController.record.email}" label="E-mail" placeholder="E-mail" />                            
+                                <b:inputText value="#{userController.entity.email}" label="E-mail" placeholder="E-mail" />                            
                             </b:column> 
                             <b:column>            
-                                <b:selectOneMenu value="#{userController.record.status}" label="Situação">        
+                                <b:selectOneMenu value="#{userController.entity.status}" label="Situação">        
                                     <f:selectItems value="#{userController.status}" var="status" itemLabel="#{status.text}" itemValue="#{status}" />
                                 </b:selectOneMenu>          
                             </b:column>                      
@@ -51,7 +51,7 @@
                             </b:row>
                             <b:row style="margin-top: 10px">
                                 <b:column style="width:100%" >
-                                    <b:dataTable style="width:100%"  value="#{userController.record.roles}" var="role" 
+                                    <b:dataTable style="width:100%"  value="#{userController.entity.roles}" var="role" 
                                                  responsive="true" paginated="false" searching="false" info="false" 
                                                  customLangUrl="#{messages['app.datatable.lang']}">          
                                         <b:dataTableColumn label="Descrição" value="#{role.description}" />

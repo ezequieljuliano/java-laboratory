@@ -35,21 +35,20 @@ public class BookmarkController extends CrudController<Bookmark, BookmarkReposit
     }
 
     public String getCategoryInformation() {
-        if (getRecord() != null && getRecord().getCategory() != null) {
-            categoryInformation = getRecord().getCategory().toString();
+        if (getEntity() != null && getEntity().getCategory() != null) {
+            categoryInformation = getEntity().getCategory().toString();
         }
         return categoryInformation;
     }
 
     @Override
-    protected void onSave(Bookmark bookmark) {
+    protected void beforeSave(Bookmark entity) {
         if (!Strings.isEmpty(categoryInformation)) {
             Category category = categoryRepository.getOne(Strings.getId(categoryInformation));
-            bookmark.setCategory(category);
+            entity.setCategory(category);
         } else {
-            bookmark.setCategory(null);
+            entity.setCategory(null);
         }
-        super.onSave(bookmark);
     }
 
 }
