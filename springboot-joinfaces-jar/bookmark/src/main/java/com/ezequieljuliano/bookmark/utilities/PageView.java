@@ -9,6 +9,6 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface PageView {
 
-    public String value() default "";
+    String value() default "";
 
 }

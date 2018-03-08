@@ -78,7 +78,7 @@ public abstract class CrudController<T, R extends JpaRepository<T, Long>> implem
     protected void afterSave(T entity) {
     }
 
-    protected void delegateSave(T entity) {
+    protected void doSave(T entity) {
         repository.save(entity);
     }
 
@@ -88,7 +88,7 @@ public abstract class CrudController<T, R extends JpaRepository<T, Long>> implem
     protected void afterDelete(T entity) {
     }
 
-    protected void delegateDelete(T entity) {
+    protected void doDelete(T entity) {
         repository.delete(entity);
     }
 
@@ -158,7 +158,7 @@ public abstract class CrudController<T, R extends JpaRepository<T, Long>> implem
     public void save() {
         try {
             beforeSave(getEntity());
-            delegateSave(getEntity());
+            doSave(getEntity());
             afterSave(getEntity());
             id = getIdValue(getEntity());
             messageContext.add("Registro salvo com sucesso.", MessageSeverity.INFO);
@@ -170,7 +170,7 @@ public abstract class CrudController<T, R extends JpaRepository<T, Long>> implem
     public String delete() {
         try {
             beforeDelete(getEntity());
-            delegateDelete(getEntity());
+            doDelete(getEntity());
             afterDelete(getEntity());
             messageContext.add("Registro excluído com sucesso.", MessageSeverity.WARN);
         } catch (Exception e) {
@@ -182,7 +182,7 @@ public abstract class CrudController<T, R extends JpaRepository<T, Long>> implem
     public void delete(T entity) {
         try {
             beforeDelete(entity);
-            delegateDelete(entity);
+            doDelete(entity);
             getList().remove(entity);
             afterDelete(entity);
             messageContext.add("Registro excluído com sucesso.", MessageSeverity.WARN);

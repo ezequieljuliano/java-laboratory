@@ -2,12 +2,12 @@ package com.ezequieljuliano.bookmark.utilities;
 
 public interface MessageContext {
 
-    public void add(String message, MessageSeverity severity, Object... args);
+    void add(String message, MessageSeverity severity, Object... args);
 
-    public void add(String message, MessageSeverity severity);
+    void add(String message, MessageSeverity severity);
 
-    public void add(String message, Object... args);
+    void add(String message, Object... args);
 
-    public void add(String message);
+    void add(String message);
 
 }

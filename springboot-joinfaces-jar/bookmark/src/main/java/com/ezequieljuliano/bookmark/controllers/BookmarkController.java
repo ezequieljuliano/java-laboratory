@@ -12,7 +12,6 @@ import java.util.List;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -25,7 +24,6 @@ public class BookmarkController extends CrudController<Bookmark, BookmarkReposit
     @Autowired
     private CategoryRepository categoryRepository;
 
-    @NotNull
     @NotEmpty
     @Setter
     private String categoryInformation;
