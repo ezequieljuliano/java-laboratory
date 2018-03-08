@@ -14,6 +14,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.Version;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import lombok.EqualsAndHashCode;
@@ -39,14 +40,14 @@ public class Bookmark implements Serializable {
     private Long id;
 
     @Column(name = "boo_description", length = 255, nullable = false)
-    @NotNull
+    @NotEmpty
     @Size(max = 255)
     @Getter
     @Setter
     private String description;
 
     @Column(name = "boo_link", length = 255, nullable = false)
-    @NotNull
+    @NotEmpty
     @Size(max = 255)
     @Getter
     @Setter

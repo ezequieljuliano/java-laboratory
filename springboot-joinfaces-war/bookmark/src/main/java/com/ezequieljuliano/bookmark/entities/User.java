@@ -24,6 +24,7 @@ import javax.persistence.Temporal;
 import javax.persistence.UniqueConstraint;
 import javax.persistence.Version;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import lombok.EqualsAndHashCode;
@@ -60,27 +61,27 @@ public class User implements Serializable {
     private Long id;
 
     @Column(name = "use_username", length = 128, nullable = false)
-    @NotNull
+    @NotEmpty
     @Size(max = 128)
     @Getter
     @Setter
     private String username;
 
     @Column(name = "use_password", length = 60, nullable = false)
-    @NotNull
+    @NotEmpty
     @Size(max = 60)
     @Getter
     private String password;
 
     @Column(name = "use_name", length = 60, nullable = false)
-    @NotNull
+    @NotEmpty
     @Size(max = 60)
     @Getter
     @Setter
     private String name;
 
     @Column(name = "use_email", length = 128, nullable = false)
-    @NotNull
+    @NotEmpty
     @Size(max = 128)
     @Email
     @Getter

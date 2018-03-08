@@ -5,7 +5,6 @@ import com.ezequieljuliano.bookmark.entities.User;
 import com.ezequieljuliano.bookmark.entities.enums.UserStatus;
 import com.ezequieljuliano.bookmark.repositories.RoleRepository;
 import com.ezequieljuliano.bookmark.repositories.UserRepository;
-import com.ezequieljuliano.bookmark.services.UserService;
 import com.ezequieljuliano.bookmark.utilities.CrudController;
 import com.ezequieljuliano.bookmark.utilities.MessageSeverity;
 import com.ezequieljuliano.bookmark.utilities.PageList;
@@ -28,9 +27,6 @@ public class UserController extends CrudController<User, UserRepository> {
     @Autowired
     private RoleRepository roleRepository;
 
-    @Autowired
-    private UserService userService;
-
     @Getter
     @Setter
     private String password;
@@ -42,26 +38,6 @@ public class UserController extends CrudController<User, UserRepository> {
     @Getter
     @Setter
     private String roleInformation;
-
-    @Override
-    protected List<User> findAll() {
-        return userService.findAll();
-    }
-
-    @Override
-    protected User findOne(Long id) {
-        return userService.getOne(id);
-    }
-
-    @Override
-    protected void delegateSave(User entity) {
-        userService.save(entity);
-    }
-
-    @Override
-    protected void delegateDelete(User entity) {
-        userService.delete(entity);
-    }
 
     @Override
     protected void beforeSave(User entity) {
