@@ -13,7 +13,7 @@
             <p>Tem certeza que deseja excluir o registro?</p>
             <f:facet name="footer">
                 <b:button value="Não" dismiss="modal" />
-                <b:commandButton value="Sim" look="primary" 
+                <b:commandButton value="Sim" look="danger" 
                                  onclick="$('.deleteConfirmModalClass').modal('hide');"
                                  actionListener="#{cc.attrs.controller.delete(cc.attrs.controller.selection)}"> 
                     <f:ajax render="@form"/>
@@ -26,11 +26,11 @@
                     <b:dataTable value="#{cc.attrs.controller.list}" var="entity" 
                                  responsive="true" style="width:100%" 
                                  customLangUrl="#{messages['app.datatable.lang']}">
-                        <composite:insertChildren />              
+                        <composite:insertChildren />    
                         <b:dataTableColumn label="Editar" style="width: 45px; min-width: 45px"
                                            data-search="false" orderable="false">
                             <b:commandButton value="Editar" 
-                                             icon="pencil" look="warning" size="xs"
+                                             icon="pencil" look="primary" size="xs"
                                              action="#{cc.attrs.controller.edit(entity)}"/>
                         </b:dataTableColumn>                                                 
                         <b:dataTableColumn label="Excluir" style="width: 45px; min-width: 45px" 

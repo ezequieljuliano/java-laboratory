@@ -20,40 +20,42 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
-        return new BCryptPasswordEncoder();
+	return new BCryptPasswordEncoder();
     }
 
     @Bean
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
+	return super.authenticationManagerBean();
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        try {
-            http.csrf().disable();
-            http
-                    .authorizeRequests()
-                    .antMatchers("/css/").permitAll()
-                    .antMatchers("/images/").permitAll()
-                    .antMatchers("/javax.faces.resource/**").permitAll()
-                    .anyRequest().authenticated()
-                    .and()
-                    .formLogin().loginPage("/login.jsf").permitAll()
-                    .failureUrl("/login.jsf?error=true")
-                    .defaultSuccessUrl("/index.jsf")
-                    .and()
-                    .logout()
-                    .logoutSuccessUrl("/login.jsf");
-        } catch (Exception ex) {
-            throw new RuntimeException(ex);
-        }
+	try {
+	    http.csrf().disable();
+	    http
+		    .authorizeRequests()
+		    .antMatchers("/js/").permitAll()
+		    .antMatchers("/css/").permitAll()
+		    .antMatchers("/img/").permitAll()
+		    .antMatchers("/cfg/").permitAll()
+		    .antMatchers("/javax.faces.resource/**").permitAll()
+		    .anyRequest().authenticated()
+		    .and()
+		    .formLogin().loginPage("/login.jsf").permitAll()
+		    .failureUrl("/login.jsf?error=true")
+		    .defaultSuccessUrl("/index.jsf")
+		    .and()
+		    .logout()
+		    .logoutSuccessUrl("/login.jsf");
+	} catch (Exception ex) {
+	    throw new RuntimeException(ex);
+	}
     }
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
+	auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
     }
 
 }
