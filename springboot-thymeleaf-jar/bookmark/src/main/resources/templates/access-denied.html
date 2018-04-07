@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/layout">
+<body>
+<div layout:fragment="content">
+    <div class="container">
+        <div class="jumbotron">
+            <h1>403</h1>
+            <h3>Você não tem permissão de acesso para esta página.</h3>
+            <h5>
+                Desculpe, mas a página que você está tentando acessar não está diponível para seu usuário.
+                Tente atualizar a página ou clique no botão abaixo para voltar para a página inicial.
+            </h5>
+            <a href="#" th:href="@{/}">
+                Volte para a página inicial
+            </a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

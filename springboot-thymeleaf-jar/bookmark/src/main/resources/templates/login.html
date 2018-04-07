@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Bookmark</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"/>
+    <script type="text/javascript" th:src="@{/webjars/jquery/3.2.1/jquery.min.js/}"></script>
+    <script type="text/javascript" th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div class="container" style="padding-top: 60px;">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Informe suas Credenciais</h3>
+                </div>
+                <div class="panel-body">
+                    <form th:action="@{/login}" method="post">
+                        <fieldset>
+                            <div th:if="${param.error}">
+                                <div class="alert alert-danger">
+                                    Suas credenciais de acesso são inválidas.
+                                </div>
+                            </div>
+                            <div th:if="${param.logout}">
+                                <div class="alert alert-info">
+                                    Você foi desconectado.
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                    <input type="text"
+                                           id="username"
+                                           name="username"
+                                           class="form-control"
+                                           autofocus="autofocus"
+                                           placeholder="Usuário">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                    <input type="password"
+                                           id="password"
+                                           name="password"
+                                           class="form-control"
+                                           placeholder="Senha">
+                                </div>
+                            </div>
+                            <button class="btn btn-lg btn-success btn-block" type="submit">
+                                <i class="glyphicon glyphicon-log-in" aria-hidden="true"></i>
+                                Entrar
+                            </button>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
