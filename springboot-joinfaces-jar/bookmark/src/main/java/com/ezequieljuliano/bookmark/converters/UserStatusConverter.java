@@ -9,20 +9,20 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
 @FacesConverter(forClass = UserStatus.class, value = "userStatusConverter")
-public class UserStatusConverter implements Converter {
+public class UserStatusConverter implements Converter<UserStatus> {
 
     @Override
-    public Object getAsObject(FacesContext fc, UIComponent uic, String string) {
-        if (!Strings.isEmpty(string)) {
-            return UserStatus.of(string);
+    public UserStatus getAsObject(FacesContext fc, UIComponent uic, String str) {
+        if (!Strings.isEmpty(str)) {
+            return UserStatus.of(str);
         }
         return null;
     }
 
     @Override
-    public String getAsString(FacesContext fc, UIComponent uic, Object o) {
-        if (o != null) {
-            return ((UserStatus) o).getDescription();
+    public String getAsString(FacesContext fc, UIComponent uic, UserStatus obj) {
+        if (obj != null) {
+            return obj.getDescription();
         }
         return "";
     }

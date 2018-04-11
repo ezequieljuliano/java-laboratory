@@ -31,7 +31,8 @@
                                              placeholder="E-mail"/>
                             </b:column>
                             <b:column>
-                                <b:selectOneMenu value="#{userController.entity.status}" label="Situação">
+                                <b:selectOneMenu value="#{userController.entity.status}" label="Situação"
+                                                 converter="userStatusConverter">
                                     <f:selectItems value="#{userController.status}" var="status"
                                                    itemLabel="#{status.description}" itemValue="#{status}"/>
                                 </b:selectOneMenu>
