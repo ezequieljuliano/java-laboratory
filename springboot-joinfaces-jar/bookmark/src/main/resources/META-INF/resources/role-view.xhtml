@@ -1,4 +1,4 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:b="http://bootsfaces.net/ui"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:x="http://java.sun.com/jsf/composite/components"
@@ -6,19 +6,21 @@
                 template="main.xhtml">
     <ui:define name="body">
         <sec:authorize access="hasRole('ROLE_ADMIN')">
-            <b:form id="roleViewForm">            
+            <b:form id="roleViewForm">
                 <b:container>
-                    <x:viewMenu controller="#{roleController}" />
+                    <x:viewMenu controller="#{roleController}"/>
                     <x:viewContent title="Perfil">
                         <b:row>
                             <b:column>
-                                <b:inputText value="#{roleController.entity.name}" onblur="value = value.toUpperCase()" label="Nome" placeholder="Nome" />                            
-                            </b:column> 
+                                <b:inputText value="#{roleController.entity.name}" onblur="value = value.toUpperCase()"
+                                             label="Nome" placeholder="Nome"/>
+                            </b:column>
                             <b:column>
-                                <b:inputText value="#{roleController.entity.description}" label="Descrição" placeholder="Descrição" />
+                                <b:inputText value="#{roleController.entity.description}" label="Descrição"
+                                             placeholder="Descrição"/>
                             </b:column>
                         </b:row>
-                    </x:viewContent>              
+                    </x:viewContent>
                 </b:container>
             </b:form>
         </sec:authorize>

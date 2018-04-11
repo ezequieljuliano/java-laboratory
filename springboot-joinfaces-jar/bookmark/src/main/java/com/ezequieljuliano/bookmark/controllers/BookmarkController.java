@@ -8,12 +8,13 @@ import com.ezequieljuliano.bookmark.utilities.CrudController;
 import com.ezequieljuliano.bookmark.utilities.PageList;
 import com.ezequieljuliano.bookmark.utilities.PageView;
 import com.ezequieljuliano.bookmark.utilities.Strings;
-import java.util.List;
+import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import javax.validation.constraints.NotEmpty;
-import lombok.Setter;
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.List;
 
 @Named
 @ViewScoped

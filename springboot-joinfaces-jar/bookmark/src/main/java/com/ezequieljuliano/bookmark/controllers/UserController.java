@@ -5,18 +5,14 @@ import com.ezequieljuliano.bookmark.entities.User;
 import com.ezequieljuliano.bookmark.entities.enums.UserStatus;
 import com.ezequieljuliano.bookmark.repositories.RoleRepository;
 import com.ezequieljuliano.bookmark.repositories.UserRepository;
-import com.ezequieljuliano.bookmark.utilities.CrudController;
-import com.ezequieljuliano.bookmark.utilities.MessageSeverity;
-import com.ezequieljuliano.bookmark.utilities.PageList;
-import com.ezequieljuliano.bookmark.utilities.PageView;
-import com.ezequieljuliano.bookmark.utilities.Strings;
-import com.ezequieljuliano.bookmark.utilities.ViewException;
-import java.util.List;
-import javax.faces.view.ViewScoped;
-import javax.inject.Named;
+import com.ezequieljuliano.bookmark.utilities.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.faces.view.ViewScoped;
+import javax.inject.Named;
+import java.util.List;
 
 @Named
 @ViewScoped

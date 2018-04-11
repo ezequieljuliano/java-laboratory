@@ -1,23 +1,24 @@
 package com.ezequieljuliano.bookmark.utilities;
 
 public enum HashAlgorithm {
+
     MD5("MD5"),
     SHA256("SHA-256");
 
-    private final String text;
+    private final String description;
 
-    private HashAlgorithm(String text) {
-        this.text = text;
+    HashAlgorithm(String description) {
+        this.description = description;
     }
 
-    public String getText() {
-        return this.text;
+    public String getDescription() {
+        return this.description;
     }
 
-    public static HashAlgorithm fromText(String text) {
-        if (text != null) {
+    public static HashAlgorithm of(String description) {
+        if (description != null) {
             for (HashAlgorithm s : HashAlgorithm.values()) {
-                if (text.equalsIgnoreCase(s.getText())) {
+                if (description.equalsIgnoreCase(s.getDescription())) {
                     return s;
                 }
             }

@@ -2,6 +2,7 @@ package com.ezequieljuliano.bookmark.converters;
 
 import com.ezequieljuliano.bookmark.entities.enums.UserStatus;
 import com.ezequieljuliano.bookmark.utilities.Strings;
+
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -13,7 +14,7 @@ public class UserStatusConverter implements Converter {
     @Override
     public Object getAsObject(FacesContext fc, UIComponent uic, String string) {
         if (!Strings.isEmpty(string)) {
-            return UserStatus.fromText(string);
+            return UserStatus.of(string);
         }
         return null;
     }
@@ -21,7 +22,7 @@ public class UserStatusConverter implements Converter {
     @Override
     public String getAsString(FacesContext fc, UIComponent uic, Object o) {
         if (o != null) {
-            return ((UserStatus) o).getText();
+            return ((UserStatus) o).getDescription();
         }
         return "";
     }

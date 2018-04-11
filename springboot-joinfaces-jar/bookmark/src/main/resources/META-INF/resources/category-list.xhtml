@@ -1,14 +1,14 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:b="http://bootsfaces.net/ui"
-                xmlns:ui="http://java.sun.com/jsf/facelets" 
+                xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:x="http://java.sun.com/jsf/composite/components"
                 template="main.xhtml">
     <ui:define name="body">
-        <b:form id="categoryListForm">            
+        <b:form id="categoryListForm">
             <b:container>
-                <x:listMenu controller="#{categoryController}" />
-                <x:listDataSet controller="#{categoryController}" title="Categorias" >
-                    <b:dataTableColumn label="Nome" value="#{entity.name}" />
+                <x:listMenu controller="#{categoryController}"/>
+                <x:listDataSet controller="#{categoryController}" title="Categorias">
+                    <b:dataTableColumn label="Nome" value="#{entity.name}"/>
                 </x:listDataSet>
             </b:container>
         </b:form>

@@ -22,7 +22,7 @@ public final class Hash {
     public Hash(String value, HashAlgorithm algorithm) {
         checksum = "";
         try {
-            MessageDigest md = MessageDigest.getInstance(algorithm.getText());
+            MessageDigest md = MessageDigest.getInstance(algorithm.getDescription());
             md.update(value.getBytes(Charset.forName("UTF-8")));
             checksum = bytesToString(md.digest());
         } catch (NoSuchAlgorithmException e) {

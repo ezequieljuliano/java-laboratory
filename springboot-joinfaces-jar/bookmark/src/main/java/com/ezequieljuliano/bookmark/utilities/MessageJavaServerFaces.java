@@ -1,9 +1,10 @@
 package com.ezequieljuliano.bookmark.utilities;
 
-import java.text.MessageFormat;
+import org.springframework.stereotype.Component;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import org.springframework.stereotype.Component;
+import java.text.MessageFormat;
 
 @Component
 public class MessageJavaServerFaces implements MessageContext {

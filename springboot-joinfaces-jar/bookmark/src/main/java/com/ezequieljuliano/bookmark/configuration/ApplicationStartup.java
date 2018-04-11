@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 @Component
+@Transactional
 public class ApplicationStartup implements ApplicationListener<ApplicationReadyEvent> {
 
     @Autowired
@@ -22,48 +23,47 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 
     @Override
     public void onApplicationEvent(ApplicationReadyEvent e) {
-        insertDefaultRoles();
-        insertDefaultUsers();
+        createRoleIfNotExists("ADMIN", "Administrador");
+        createRoleIfNotExists("USER", "Usuário");
+        createUserIfNotExists(getAdminUser());
+        createUserIfNotExists(getNormalUser());
     }
 
-    @Transactional
-    private void insertDefaultRoles() {
-        if (roleRepository.findByName("ADMIN") == null) {
+    private void createRoleIfNotExists(String name, String description) {
+        if (roleRepository.findByName(name) == null) {
             Role role = new Role();
-            role.setName("ADMIN");
-            role.setDescription("Administrador");
-            roleRepository.save(role);
-        }
-        if (roleRepository.findByName("USER") == null) {
-            Role role = new Role();
-            role.setName("USER");
-            role.setDescription("Usuário");
+            role.setName(name);
+            role.setDescription(description);
             roleRepository.save(role);
         }
     }
 
-    @Transactional
-    private void insertDefaultUsers() {
-        if (userRepository.findByUsername("admin") == null) {
-            User user = new User();
-            user.setUsername("admin");
-            user.setPassword("admin");
-            user.setName("Administrador");
-            user.setEmail("administrador@bookmark.com");
-            user.setStatus(UserStatus.ACTIVE);
-            user.setRoles(roleRepository.findAll());
+    private void createUserIfNotExists(User user) {
+        if (userRepository.findByUsername(user.getUsername()) == null) {
             userRepository.save(user);
         }
-        if (userRepository.findByUsername("usuario") == null) {
-            User user = new User();
-            user.setUsername("usuario");
-            user.setPassword("usuario");
-            user.setName("Usuário");
-            user.setEmail("usuario@bookmark.com");
-            user.setStatus(UserStatus.ACTIVE);
-            user.getRoles().add(roleRepository.findByName("USER"));
-            userRepository.save(user);
-        }
+    }
+
+    private User getAdminUser() {
+        User user = new User();
+        user.setUsername("admin");
+        user.setPassword("admin");
+        user.setName("Administrador");
+        user.setEmail("administrador@bookmark.com");
+        user.setStatus(UserStatus.ACTIVE);
+        user.setRoles(roleRepository.findAll());
+        return user;
+    }
+
+    private User getNormalUser() {
+        User user = new User();
+        user.setUsername("usuario");
+        user.setPassword("usuario");
+        user.setName("Usuário");
+        user.setEmail("usuario@bookmark.com");
+        user.setStatus(UserStatus.ACTIVE);
+        user.getRoles().add(roleRepository.findByName("USER"));
+        return user;
     }
 
 }

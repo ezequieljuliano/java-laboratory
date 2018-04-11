@@ -4,5 +4,5 @@ public enum MessageSeverity {
     INFO,
     WARN,
     ERROR,
-    FATAL;
+    FATAL
 }

@@ -1,7 +1,5 @@
 package com.ezequieljuliano.bookmark.services;
 
-import java.util.HashSet;
-import java.util.Set;
 import com.ezequieljuliano.bookmark.entities.Role;
 import com.ezequieljuliano.bookmark.entities.User;
 import com.ezequieljuliano.bookmark.repositories.UserRepository;
@@ -13,6 +11,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Service
 public class SecurityUserDetailsService implements UserDetailsService {

@@ -1,7 +1,6 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"  
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:b="http://bootsfaces.net/ui"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
-                xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:sec="http://www.springframework.org/security/tags">
 
     <b:navBar brand="#{messages['app.name']}" brandHref="index.jsf">
@@ -18,9 +17,10 @@
             </sec:authorize>
         </b:navbarLinks>
         <div class="navbar-form navbar-right">
-            <b:button value="Sair" look="default" icon="log-out" iconAlign="right" onclick="document.getElementById('logout').submit();" />
-            <form action="logout" id="logout" method="post">                           
-                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+            <b:button value="Sair" look="default" icon="log-out" iconAlign="right"
+                      onclick="document.getElementById('logout').submit();"/>
+            <form action="logout" id="logout" method="post">
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             </form>
         </div>
     </b:navBar>

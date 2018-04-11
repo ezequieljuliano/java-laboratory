@@ -8,20 +8,20 @@ public enum UserStatus implements Serializable {
     INACTIVE("Inativo"),
     BLOCKED("Bloqueado");
 
-    private final String text;
+    private final String description;
 
-    private UserStatus(String text) {
-        this.text = text;
+    UserStatus(String description) {
+        this.description = description;
     }
 
-    public String getText() {
-        return this.text;
+    public String getDescription() {
+        return this.description;
     }
 
-    public static UserStatus fromText(String text) {
-        if (text != null) {
+    public static UserStatus of(String description) {
+        if (description != null) {
             for (UserStatus s : UserStatus.values()) {
-                if (text.equalsIgnoreCase(s.getText())) {
+                if (description.equalsIgnoreCase(s.getDescription())) {
                     return s;
                 }
             }
