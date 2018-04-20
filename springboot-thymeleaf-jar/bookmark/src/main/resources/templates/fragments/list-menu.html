@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="pt"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head></head>
+<body layout:fragment="actions(createAction, editAction)">
+<div class="btn-group" role="group" style="padding-bottom: 5px">
+    <a class="btn btn-primary btn-md" th:href="${createAction}">
+        <i class="glyphicon glyphicon-plus" aria-hidden="true"></i>
+        Adicionar Novo
+    </a>
+    <a class="btn btn-default btn-md" th:href="${editAction}">
+        <i class="glyphicon glyphicon-refresh" aria-hidden="true"></i>
+        Atualizar Listagem
+    </a>
+    <div layout:fragment="additionalActions" th:remove="tag"></div>
+</div>
+</body>
+</html>

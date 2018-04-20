@@ -1,66 +1,23 @@
 <!DOCTYPE html>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/layout"
+<html lang="pt"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-<head>
-    <title>Bookmark</title>
-</head>
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+<head></head>
 <body>
-<div layout:fragment="content" sec:authorize="hasRole('ROLE_ADMIN')">
+<section layout:fragment="content" sec:authorize="hasRole('ROLE_ADMIN')">
     <form class="form-horizontal" action="#" th:action="@{/users/create}" th:object="${user}" method="POST">
-        <div class="btn-group" user="group" style="padding-bottom: 5px">
-            <a class="btn btn-default btn-md" th:href="@{/users}">
-                <i class="glyphicon glyphicon-chevron-left" aria-hidden="true"></i>
-                Voltar
-            </a>
-            <a class="btn btn-default btn-md" th:href="@{/users/{id}/edit(id=${user.id})}"
-               th:if="${user.id != null}">
-                <i class="glyphicon glyphicon-refresh" aria-hidden="true"></i>
-                Atualizar
-            </a>
-            <a class="btn btn-primary btn-md" th:href="@{/users/create}" th:if="${user.id != null}">
-                <i class="glyphicon glyphicon-plus" aria-hidden="true"></i>
-                Adicionar
-            </a>
-            <button type="submit" class="btn btn-success btn-md">
-                <i class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></i>
-                Salvar
-            </button>
-            <div id="deleteConfirmationModal" class="modal fade" user="dialog">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title" th:align="left">Exclusão de Registro</h4>
-                        </div>
-                        <div class="modal-body" th:align="left">
-                            <p>Tem certeza que deseja excluir o registro?</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
-                            <a class="btn btn-danger"
-                               th:href="@{/users/{id}/delete(id=${user.id})}">Excluir</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <a th:if="${user.id != null}" type="button" class="btn btn-danger btn-md" data-toggle="modal"
-               data-target="#deleteConfirmationModal">
-                <i class="glyphicon glyphicon-trash" aria-hidden="true"></i>
-                Excluir
-            </a>
+        <div layout:insert="fragments/view-menu :: actions(
+                isUpdateMode=${user.id != null},
+                backAction=@{/users},
+                updateAction=@{/users/{id}/edit(id=${user.id})},
+                createAction=@{/users/create},
+                deleteAction=@{/users/{id}/delete(id=${user.id})})">
+            <div layout:fragment="additionalActions"></div>
         </div>
-
-        <div class="panel panel-default">
-            <div class="panel-heading">Usuário</div>
-            <div class="row" style="margin: 10px">
-                <div class="column">
-                    <div class="alert alert-danger" th:if="${#fields.hasAnyErrors()}">
-                        <div th:each="detailedError : ${#fields.detailedErrors()}">
-                            <span th:text="${detailedError.message}"></span>
-                        </div>
-                    </div>
-                </div>
+        <div layout:insert="fragments/view-body :: header(description='Usuário')">
+            <div layout:fragment="viewContent">
                 <input type="hidden" th:field="*{id}"/>
                 <div class="column">
                     <label for="username">Usuário *</label>
@@ -92,7 +49,7 @@
                     <select class="form-control input-sm" id="status" th:field="*{status}">
                         <option th:each="status : ${statusValues}"
                                 th:value="${status}"
-                                th:text="${status.text}">
+                                th:text="${status.description}">
                         </option>
                     </select>
                 </div>
@@ -100,14 +57,15 @@
         </div>
     </form>
 
-    <form class="form-horizontal" action="#" th:action="@{/users/{id}/roles/create (id=${user.id})}" th:object="${role}"
-          method="POST">
+    <form class="form-horizontal" action="#" th:action="@{/users/{id}/roles/create (id=${user.id})}"
+          th:object="${role}" method="POST">
         <div th:if="${user.id != null}" class="panel panel-default">
             <div class="panel-heading">Perfis de Acesso</div>
             <div class="panel-body">
-                <div class="row">
+                <div class="row" style="margin-bottom: 10px">
                     <div class="col-sm-8">
-                        <select id="perfil" class="selectRole form-control input-sm" data-live-search="true" th:field="*{id}">
+                        <select id="perfil" class="selectOneMenu form-control input-sm" data-live-search="true"
+                                th:field="*{id}">
                             <option th:each="r : ${roles}"
                                     th:value="${r.id}"
                                     th:text="${r.description}">
@@ -121,11 +79,11 @@
                         </button>
                     </div>
                 </div>
-                <table id="roleList" class="table table-striped table-bordered" style="width:100%">
+                <table class="table table-striped table-bordered" style="width:100%">
                     <thead>
                     <tr>
                         <th>Descrição</th>
-                        <th align="center" style="width: 45px; min-width: 45px">Excluir</th>
+                        <th align="center" style="width: 45px; min-width: 45px">Ações</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -136,7 +94,6 @@
                                 <a class="btn btn-danger btn-xs"
                                    th:href="@{/users/{id}/roles/{roleId}/delete (id=${user.id}, roleId=${role.id})}">
                                     <i class="glyphicon glyphicon-trash" aria-hidden="true"></i>
-                                    Excluir
                                 </a>
                             </div>
                         </td>
@@ -146,8 +103,6 @@
             </div>
         </div>
     </form>
-
-    <script type="text/javascript" th:src="@{/js/user-view.js}"></script>
-</div>
+</section>
 </body>
 </html>

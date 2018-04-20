@@ -1,65 +1,22 @@
 <!DOCTYPE html>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/layout"
-      xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Bookmark</title>
-</head>
+<html lang="pt"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+<head></head>
 <body>
-<div layout:fragment="content">
+<section layout:fragment="content">
     <form class="form-horizontal" action="#" th:action="@{/categories/create}" th:object="${category}" method="POST">
-        <div class="btn-group" role="group" style="padding-bottom: 5px">
-            <a class="btn btn-default btn-md" th:href="@{/categories}">
-                <i class="glyphicon glyphicon-chevron-left" aria-hidden="true"></i>
-                Voltar
-            </a>
-            <a class="btn btn-default btn-md" th:href="@{/categories/{id}/edit(id=${category.id})}"
-               th:if="${category.id != null}">
-                <i class="glyphicon glyphicon-refresh" aria-hidden="true"></i>
-                Atualizar
-            </a>
-            <a class="btn btn-primary btn-md" th:href="@{/categories/create}" th:if="${category.id != null}">
-                <i class="glyphicon glyphicon-plus" aria-hidden="true"></i>
-                Adicionar
-            </a>
-            <button type="submit" class="btn btn-success btn-md">
-                <i class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></i>
-                Salvar
-            </button>
-            <div id="deleteConfirmationModal" class="modal fade" role="dialog">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title" th:align="left">Exclusão de Registro</h4>
-                        </div>
-                        <div class="modal-body" th:align="left">
-                            <p>Tem certeza que deseja excluir o registro?</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
-                            <a class="btn btn-danger"
-                               th:href="@{/categories/{id}/delete(id=${category.id})}">Excluir</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <a th:if="${category.id != null}" type="button" class="btn btn-danger btn-md" data-toggle="modal"
-               data-target="#deleteConfirmationModal">
-                <i class="glyphicon glyphicon-trash" aria-hidden="true"></i>
-                Excluir
-            </a>
+        <div layout:insert="fragments/view-menu :: actions(
+                isUpdateMode=${category.id != null},
+                backAction=@{/categories},
+                updateAction=@{/categories/{id}/edit(id=${category.id})},
+                createAction=@{/categories/create},
+                deleteAction=@{/categories/{id}/delete(id=${category.id})})">
+            <div layout:fragment="additionalActions"></div>
         </div>
-
-        <div class="panel panel-default">
-            <div class="panel-heading">Categoria</div>
-            <div class="row" style="margin: 10px">
-                <div class="column">
-                    <div class="alert alert-danger" th:if="${#fields.hasAnyErrors()}">
-                        <div th:each="detailedError : ${#fields.detailedErrors()}">
-                            <span th:text="${detailedError.message}"></span>
-                        </div>
-                    </div>
-                </div>
+        <div layout:insert="fragments/view-body :: header(description='Categoria')">
+            <div layout:fragment="viewContent">
                 <input type="hidden" th:field="*{id}"/>
                 <input type="hidden" th:field="*{created}"/>
                 <input type="hidden" th:field="*{updated}"/>
@@ -71,6 +28,6 @@
             </div>
         </div>
     </form>
-</div>
+</section>
 </body>
 </html>

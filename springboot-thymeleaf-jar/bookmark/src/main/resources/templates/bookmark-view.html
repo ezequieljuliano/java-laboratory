@@ -1,81 +1,39 @@
 <!DOCTYPE html>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/layout"
-      xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Bookmark</title>
-</head>
+<html lang="pt"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+<head></head>
 <body>
-<div layout:fragment="content">
+<section layout:fragment="content">
     <form class="form-horizontal" action="#" th:action="@{/bookmarks/create}" th:object="${bookmark}" method="POST">
-        <div class="btn-group" role="group" style="padding-bottom: 5px">
-            <a class="btn btn-default btn-md" th:href="@{/bookmarks}">
-                <i class="glyphicon glyphicon-chevron-left" aria-hidden="true"></i>
-                Voltar
-            </a>
-            <a class="btn btn-default btn-md" th:href="@{/bookmarks/{id}/edit(id=${bookmark.id})}"
-               th:if="${bookmark.id != null}">
-                <i class="glyphicon glyphicon-refresh" aria-hidden="true"></i>
-                Atualizar
-            </a>
-            <a class="btn btn-primary btn-md" th:href="@{/bookmarks/create}" th:if="${bookmark.id != null}">
-                <i class="glyphicon glyphicon-plus" aria-hidden="true"></i>
-                Adicionar
-            </a>
-            <button type="submit" class="btn btn-success btn-md">
-                <i class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></i>
-                Salvar
-            </button>
-            <div id="deleteConfirmationModal" class="modal fade" role="dialog">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title" th:align="left">Exclusão de Registro</h4>
-                        </div>
-                        <div class="modal-body" th:align="left">
-                            <p>Tem certeza que deseja excluir o registro?</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
-                            <a class="btn btn-danger"
-                               th:href="@{/bookmarks/{id}/delete(id=${bookmark.id})}">Excluir</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <a th:if="${bookmark.id != null}" type="button" class="btn btn-danger btn-md" data-toggle="modal"
-               data-target="#deleteConfirmationModal">
-                <i class="glyphicon glyphicon-trash" aria-hidden="true"></i>
-                Excluir
-            </a>
+        <div layout:insert="fragments/view-menu :: actions(
+                isUpdateMode=${bookmark.id != null},
+                backAction=@{/bookmarks},
+                updateAction=@{/bookmarks/{id}/edit(id=${bookmark.id})},
+                createAction=@{/bookmarks/create},
+                deleteAction=@{/bookmarks/{id}/delete(id=${bookmark.id})})">
+            <div layout:fragment="additionalActions"></div>
         </div>
-
-        <div class="panel panel-default">
-            <div class="panel-heading">Bookmark</div>
-            <div class="row" style="margin: 10px">
-                <div class="column">
-                    <div class="alert alert-danger" th:if="${#fields.hasAnyErrors()}">
-                        <div th:each="detailedError : ${#fields.detailedErrors()}">
-                            <span th:text="${detailedError.message}"></span>
-                        </div>
-                    </div>
-                </div>
+        <div layout:insert="fragments/view-body :: header(description='Bookmark')">
+            <div layout:fragment="viewContent">
                 <input type="hidden" th:field="*{id}"/>
                 <input type="hidden" th:field="*{created}"/>
                 <input type="hidden" th:field="*{updated}"/>
                 <input type="hidden" th:field="*{version}"/>
                 <div class="column">
                     <label for="description">Descrição *</label>
-                    <input type="text" class="form-control input-sm" id="description" th:field="*{description}"
-                           placeholder="Descrição"/>
+                    <input type="text" class="form-control input-sm" id="description"
+                           th:field="*{description}" placeholder="Descrição"/>
                 </div>
                 <div class="column" style="margin-top: 10px">
                     <label for="link">Link *</label>
                     <input type="text" class="form-control input-sm" id="link" th:field="*{link}" placeholder="Link"/>
                 </div>
-                <div class="column" style="margin-top: 10px">
+                <div class="column" style="margin-top: 10px; margin-bottom: 10px">
                     <label for="category">Categoria *</label>
-                    <select id="category" class="selectCategory form-control input-sm" data-live-search="true" th:field="*{category}">
+                    <select id="category" class="selectOneMenu form-control input-sm"
+                            data-live-search="true" th:field="*{category}">
                         <option th:value="${null}">Selecione...</option>
                         <option th:each="category : ${categories}"
                                 th:value="${category.id}"
@@ -86,8 +44,6 @@
             </div>
         </div>
     </form>
-
-    <script type="text/javascript" th:src="@{/js/bookmark-view.js}"></script>
-</div>
+</section>
 </body>
 </html>

@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
+<html lang="pt"
+      xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="layout/layout">
+      layout:decorate="~{layout/layout}">
+<head></head>
 <body>
-<div layout:fragment="content">
+<section layout:fragment="content">
     <div class="container">
         <div class="jumbotron">
             <h1>403</h1>
@@ -13,10 +15,10 @@
                 Tente atualizar a página ou clique no botão abaixo para voltar para a página inicial.
             </h5>
             <a href="#" th:href="@{/}">
-                Volte para a página inicial
+                Voltar para a página inicial
             </a>
         </div>
     </div>
-</div>
+</section>
 </body>
 </html>

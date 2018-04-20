@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head></head>
+<body layout:fragment="header(description)">
+<div class="panel panel-default">
+    <div class="panel-heading"><span th:text="${description}" th:remove="tag"></span></div>
+    <div class="row" style="margin: 10px">
+        <div class="column" th:if="${#fields.hasAnyErrors()}">
+            <div class="alert alert-danger">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <div th:each="detailedError : ${#fields.detailedErrors()}">
+                    <i class="glyphicon glyphicon-remove-circle"></i>
+                    <span th:text="${detailedError.message}"></span>
+                </div>
+            </div>
+        </div>
+        <div class="column" th:if="${!#strings.isEmpty(message)}">
+            <div class="alert  alert-success">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <i class="glyphicon glyphicon-ok-circle"></i>
+                <span th:text="${message}"></span>
+            </div>
+        </div>
+        <div layout:fragment="viewContent"></div>
+    </div>
+</div>
+</body>
+</html>
