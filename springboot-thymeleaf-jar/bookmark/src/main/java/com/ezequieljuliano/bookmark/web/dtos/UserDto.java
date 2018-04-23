@@ -4,6 +4,7 @@ import com.ezequieljuliano.bookmark.domain.entities.Role;
 import com.ezequieljuliano.bookmark.domain.entities.User;
 import com.ezequieljuliano.bookmark.infrastructure.tools.Strings;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
+@NoArgsConstructor
 public class UserDto implements Serializable {
 
     private Long id;
@@ -42,27 +44,46 @@ public class UserDto implements Serializable {
 
     private List<RoleDto> roles;
 
-    public UserDto() {
-    }
-
-    public UserDto(User user) {
-        this.id = user.getId();
-        this.username = user.getUsername();
-        this.password = null;
-        this.confirmation = null;
-        this.name = user.getName();
-        this.email = user.getEmail();
-        this.status = user.getStatus();
-        for (Role role : user.getRoles()) {
-            this.getRoles().add(new RoleDto(role));
-        }
-    }
-
     public List<RoleDto> getRoles() {
         if (roles == null)
             roles = new ArrayList<>();
         return roles;
     }
+
+    public String getRolesDescriptions() {
+        String descriptions = "";
+        for (int i = 0; i < getRoles().size(); i++) {
+            descriptions = descriptions.concat(getRoles().get(i).getDescription());
+            if (i < (getRoles().size() - 1)) {
+                descriptions = descriptions.concat(", ");
+            }
+        }
+        return descriptions;
+    }
+
+    public static UserDto create(User user) {
+        UserDto result = new UserDto();
+        result.setId(user.getId());
+        result.setUsername(user.getUsername());
+        result.setPassword(null);
+        result.setConfirmation(null);
+        result.setName(user.getName());
+        result.setEmail(user.getEmail());
+        result.setStatus(user.getStatus());
+        for (Role role : user.getRoles()) {
+            result.getRoles().add(RoleDto.create(role));
+        }
+        return result;
+    }
+
+    public static List<UserDto> createList(List<User> users) {
+        List<UserDto> result = new ArrayList<>();
+        for (User user : users) {
+            result.add(UserDto.create(user));
+        }
+        return result;
+    }
+
 
     public void toEntity(User user) {
         user.setUsername(this.username);

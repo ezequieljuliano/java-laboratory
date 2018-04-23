@@ -4,9 +4,9 @@ import com.ezequieljuliano.bookmark.domain.entities.Role;
 import com.ezequieljuliano.bookmark.domain.entities.User;
 import com.ezequieljuliano.bookmark.domain.repositories.RoleRepository;
 import com.ezequieljuliano.bookmark.domain.repositories.UserRepository;
+import com.ezequieljuliano.bookmark.infrastructure.tools.Strings;
 import com.ezequieljuliano.bookmark.web.dtos.RoleDto;
 import com.ezequieljuliano.bookmark.web.dtos.UserDto;
-import com.ezequieljuliano.bookmark.infrastructure.tools.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -30,7 +30,7 @@ public class UserController {
 
     @GetMapping
     public String findAll(Model model) {
-        model.addAttribute("users", userRepository.findAll());
+        model.addAttribute("users", UserDto.createList(userRepository.findAll()));
         return "user-list";
     }
 
@@ -38,16 +38,14 @@ public class UserController {
     public String create(Model model, UserDto user) {
         model.addAttribute("user", user);
         model.addAttribute("statusValues", User.Status.values());
-
-        RoleDto role = new RoleDto();
-        model.addAttribute("role", role);
-        model.addAttribute("roles", role.asList(roleRepository.findAll()));
+        model.addAttribute("role", new RoleDto());
+        model.addAttribute("roles", RoleDto.createList(roleRepository.findAll()));
         return "user-view";
     }
 
     @GetMapping("/{id}/edit")
     public String edit(Model model, @PathVariable("id") Long id) {
-        return create(model, new UserDto(userRepository.getOne(id)));
+        return create(model, UserDto.create(userRepository.getOne(id)));
     }
 
     @GetMapping("/{id}/delete")
