@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:composite="http://java.sun.com/jsf/composite">
+
+    <composite:interface>
+		<composite:attribute name="manager" required="true"/>
+        <composite:attribute name="securityResource" required="true"/>
+    </composite:interface>
+
+    <composite:implementation>
+        <p:growl showSummary="false" showDetail="true"/>
+
+        <p:commandButton title="Adicionar" style="margin-right:5px;margin-top:3px;"
+                         value="Adicionar" icon="fa fa-plus"
+                         rendered="#{sec:areAnyGranted(cc.attrs.securityResource.concat('_INSERIR'))}"
+                         action="#{cc.attrs.manager.insert}"/>
+
+        <p:commandButton title="Excluir todos os registros selecionados" style="margin-right:5px;margin-top:3px"
+                         value="Excluir selecionados" icon="fa fa-trash" styleClass="btn-danger"
+                         rendered="#{not empty cc.attrs.manager.selectedEntities and cc.attrs.manager.selectedEntities != null and sec:areAnyGranted(cc.attrs.securityResource.concat('_EXCLUIR'))}"
+                         action="#{cc.attrs.manager.delete(cc.attrs.manager.selectedEntities)}">
+            <p:confirm header="Confirmar exclusão de registros" message="Tem certeza que deseja excluir os registros selecionados?" icon="fa fa-exclamation-triangle" />
+        </p:commandButton>
+
+        <p:confirmDialog widgetVar="deleteConfirmation" global="true" showEffect="fade" hideEffect="fade">
+            <p:commandButton value="Sim, claro!" type="button" styleClass="ui-confirmdialog-yes" icon="fa fa-check" />
+            <p:commandButton value="Ainda não!" type="button" styleClass="ui-confirmdialog-no" icon="fa fa-times" />
+        </p:confirmDialog>
+
+        <composite:insertChildren/>
+    </composite:implementation>
+
+</html>

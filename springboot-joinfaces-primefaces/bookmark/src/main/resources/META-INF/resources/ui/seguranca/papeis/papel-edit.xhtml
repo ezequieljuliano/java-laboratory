@@ -1,0 +1,37 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:x="http://java.sun.com/jsf/composite/components"
+                xmlns:sec="https://joinfaces.org/security"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="title">
+        Segurança | Papeis
+    </ui:define>
+
+    <ui:define name="description">
+        A definição do papel de segurança é um passo fundamental e tem o intuito de caracterizar a função do usuário no sistema
+    </ui:define>
+
+    <ui:define name="implementation">
+        <sec:authorize access="hasRole('PAPEL_VISUALIZAR')">
+            <h:form>
+                <x:edit-menu manager="#{papelEditManager}" securityResource="PAPEL"/>
+                <x:edit-content header="Cadastro de papeis">
+                    <h:panelGrid columns="1" style="width:100%;">
+                        <p:outputLabel value="Nome" for="papelNome"/>
+                        <p:inputText id="papelNome" value="#{papelEditManager.entity.nome}" style="width:100%"/>
+                    </h:panelGrid>
+                    <h3>Selecione as permissões do papel</h3>
+                    <p:selectManyCheckbox id="papelPermissoes" layout="pageDirection" columns="1"
+                                          value="#{papelEditManager.entity.permissoes}" collectionType="java.util.ArrayList">
+                        <f:selectItems value="#{papelEditManager.permissoes}" var="permissao" itemLabel="#{permissao.descricao}" itemValue="#{permissao}"/>
+                    </p:selectManyCheckbox>
+                </x:edit-content>
+            </h:form>
+        </sec:authorize>
+    </ui:define>
+
+</ui:composition>

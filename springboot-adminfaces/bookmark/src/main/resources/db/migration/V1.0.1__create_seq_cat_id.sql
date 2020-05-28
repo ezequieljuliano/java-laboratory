@@ -1,1 +1,0 @@
-create sequence seq_cat_id;

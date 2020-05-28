@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      lang="pt-br">
+
+<h:head>
+    <f:facet name="first">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <link href="#{resource['showcase/images/favicon-32x32.png']}" rel="icon" type="image/png" sizes="32x32" />
+        <link href="#{resource['showcase/images/favicon-16x16.png']}" rel="icon" type="image/png" sizes="16x16" />
+    </f:facet>
+
+    <title>Bookmark</title>
+
+    <h:outputStylesheet name="css/sh.css" library="showcase" />
+    <h:outputStylesheet name="css/nanoscroller.css" library="showcase" />
+    <h:outputStylesheet name="css/primeflex.css" library="showcase" />
+    <h:outputStylesheet name="primeicons/primeicons.css" library="primefaces" />
+    <h:outputScript name="jquery/jquery.js" library="primefaces" />
+    <h:outputScript name="jquery/jquery-plugins.js" library="primefaces" />
+    <h:outputScript name="script/nanoscroller.js" library="showcase" />
+    <h:outputScript name="script/layout.js" library="showcase" />
+
+    <ui:insert name="head" />
+</h:head>
+
+<h:body>
+    <div class="layout-wrapper">
+        <ui:include src="./topbar.xhtml"/>
+        <ui:include src="./menu.xhtml"/>
+
+        <div class="layout-content">
+            <ui:insert name="content">
+                <div class="content-section content-submenu">
+                    <ui:insert name="submenu"/>
+                </div>
+
+                <div class="content-section content-introduction">
+                    <h1>
+                        <ui:insert name="title"/>
+                    </h1>
+                    <p>
+                        <ui:insert name="description"/>
+                    </p>
+                </div>
+
+                <div class="content-section content-implementation">
+                    <ui:insert name="implementation"/>
+                </div>
+            </ui:insert>
+        </div>
+
+        <ui:include src="./footer.xhtml"/>
+
+        <div class="layout-mask"></div>
+    </div>
+
+    <ui:insert name="status">
+        <p:ajaxStatus style="width:64px;height:64px;position:fixed;right:5px;bottom:5px">
+            <f:facet name="start">
+                <i class="pi pi-spin pi-spinner ajax-loader" aria-hidden="true"/>
+            </f:facet>
+            <f:facet name="complete">
+                <h:outputText value="" />
+            </f:facet>
+        </p:ajaxStatus>
+    </ui:insert>
+
+    <ui:insert name="highlight">
+        <h:outputScript name="showcase/script/sh.js" target="body" />
+    </ui:insert>
+
+    <ui:insert name="body"/>
+
+    <h:outputStylesheet name="css/layout.css" library="showcase" />
+</h:body>
+
+</html>

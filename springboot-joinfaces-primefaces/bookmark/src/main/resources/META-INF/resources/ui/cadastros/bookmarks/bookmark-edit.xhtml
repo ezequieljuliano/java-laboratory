@@ -1,0 +1,45 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:x="http://java.sun.com/jsf/composite/components"
+                xmlns:sec="https://joinfaces.org/security"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="title">
+        Cadastros | Bookmarks
+    </ui:define>
+
+    <ui:define name="description">
+        Um bookmark é um favorito ou marcador, é um endereço na Internet, URI guardado no navegador,
+        e onde as marcações são acessadas por um menu no navegador do utilizador
+    </ui:define>
+
+    <ui:define name="implementation">
+        <sec:authorize access="hasRole('BOOKMARK_VISUALIZAR')">
+            <h:form>
+                <x:edit-menu manager="#{bookmarkEditManager}" securityResource="BOOKMARK"/>
+                <x:edit-content header="Cadastro de bookmark">
+                    <h:panelGrid columns="1" style="width:100%;">
+                        <p:outputLabel value="Descrição" for="bookmarkDescricao"/>
+                        <p:inputText id="bookmarkDescricao" value="#{bookmarkEditManager.entity.descricao}" style="width:100%"/>
+
+                        <p:outputLabel value="Link" for="bookmarkLink"/>
+                        <p:inputText id="bookmarkLink" value="#{bookmarkEditManager.entity.link}" style="width:100%;"/>
+
+                        <p:outputLabel value="Categoria" for="bookmarkCategoria"/>
+                        <p:autoComplete id="bookmarkCategoria" style="ui-autocomplete" inputStyle="width:100%;"
+                                        value="#{bookmarkEditManager.entity.categoria}"
+                                        placeholder="Digite para pesquisar..." maxResults="5"
+                                        completeMethod="#{bookmarkEditManager.onCompleteCategoria}"
+                                        var="categoria" itemLabel="#{categoria.nome}" itemValue="#{categoria}"
+                                        forceSelection="true" dropdown="true"
+                                        converter="#{categoriaConverter}"/>
+                    </h:panelGrid>
+                </x:edit-content>
+            </h:form>
+        </sec:authorize>
+    </ui:define>
+
+</ui:composition>

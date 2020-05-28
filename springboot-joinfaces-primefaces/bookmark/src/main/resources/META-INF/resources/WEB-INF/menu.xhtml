@@ -1,0 +1,83 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:sec="https://joinfaces.org/security"
+                xmlns:p="http://primefaces.org/ui">
+
+    <div class="layout-sidebar">
+        <div class="nano">
+            <div class="nano-content menu-scroll-content">
+                <div class="search-input">
+                    <i class="pi pi-search icon-search"/>
+                    <input type="text"/>
+                </div>
+
+                <ul id="layout-menu" class="layout-menu">
+                    <sec:authorize access="hasAnyRole('CATEGORIA_VISUALIZAR', 'BOOKMARK_VISUALIZAR')">
+                        <li id="submenu-cadastros">
+                            <a href="#">
+                                <p:graphicImage name="images/icons/file.svg" library="showcase" />
+                                <span>Cadastros</span>
+                            </a>
+                            <div>
+                                <sec:authorize access="hasRole('CATEGORIA_VISUALIZAR')">
+                                    <ul>
+                                        <li>
+                                            <h:link outcome="/ui/cadastros/categorias/categoria-list">
+                                                <i class="pi pi-circle-on"/>
+                                                <span class="menuitem-text">Categorias</span>
+                                            </h:link>
+                                        </li>
+                                    </ul>
+                                </sec:authorize>
+                                <sec:authorize access="hasRole('BOOKMARK_VISUALIZAR')">
+                                    <ul>
+                                        <li>
+                                            <h:link outcome="/ui/cadastros/bookmarks/bookmark-list">
+                                                <i class="pi pi-circle-on"/>
+                                                <span class="menuitem-text">Bookmarks</span>
+                                            </h:link>
+                                        </li>
+                                    </ul>
+                                </sec:authorize>
+                            </div>
+                        </li>
+                    </sec:authorize>
+
+                    <sec:authorize access="hasAnyRole('USUARIO_VISUALIZAR', 'PAPEL_VISUALIZAR')">
+                        <li id="submenu-seguranca">
+                            <a href="#">
+                                <p:graphicImage name="images/icons/file.svg" library="showcase" />
+                                <span>Segurança</span>
+                            </a>
+                            <div>
+                                <sec:authorize access="hasRole('PAPEL_VISUALIZAR')">
+                                    <ul>
+                                        <li>
+                                            <h:link outcome="/ui/seguranca/papeis/papel-list">
+                                                <i class="pi pi-circle-on"/>
+                                                <span class="menuitem-text">Papeis</span>
+                                            </h:link>
+                                        </li>
+                                    </ul>
+                                </sec:authorize>
+                                <sec:authorize access="hasRole('USUARIO_VISUALIZAR')">
+                                    <ul>
+                                        <li>
+                                            <h:link outcome="/ui/seguranca/usuarios/usuario-list">
+                                                <i class="pi pi-circle-on"/>
+                                                <span class="menuitem-text">Usuários</span>
+                                            </h:link>
+                                        </li>
+                                    </ul>
+                                </sec:authorize>
+                            </div>
+                        </li>
+                    </sec:authorize>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</ui:composition>

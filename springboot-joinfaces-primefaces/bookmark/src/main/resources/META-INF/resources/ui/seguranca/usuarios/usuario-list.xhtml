@@ -1,0 +1,46 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:x="http://java.sun.com/jsf/composite/components"
+                xmlns:sec="https://joinfaces.org/security"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="title">
+        Segurança | Usuários
+    </ui:define>
+
+    <ui:define name="description">
+        A definição do usuário é necessária para o correto funcionamento do mecanismo de autenticação e autorização do sistema
+    </ui:define>
+
+    <ui:define name="implementation">
+        <sec:authorize access="hasRole('USUARIO_VISUALIZAR')">
+            <h:form>
+                <x:list-menu manager="#{usuarioListManager}" securityResource="USUARIO"/>
+                <x:list-datatable manager="#{usuarioListManager}">
+                    <p:column headerText="Nome" priority="1" style="width:30%;" sortBy="#{entity.nome}"
+                              filterBy="#{entity.nome}" filterMatchMode="contains" filterStyle="display:none">
+                        <h:outputText value="#{entity.nome}"/>
+                    </p:column>
+                    <p:column headerText="E-mail" priority="4" style="width:25%;" sortBy="#{entity.email}"
+                              filterBy="#{entity.email}" filterMatchMode="contains" filterStyle="display:none">
+                        <h:outputText value="#{entity.email}"/>
+                    </p:column>
+                    <p:column headerText="Ativo" priority="1" style="width:10%;" sortBy="#{entity.ativo}">
+                        <h:outputText rendered="#{entity.ativo == true}" style="display: block; width:100%; text-align:center;" styleClass="pi pi-check"/>
+                    </p:column>
+                    <p:column headerText="Administrador" priority="3" style="width:15%;" sortBy="#{entity.administrador}">
+                        <h:outputText rendered="#{entity.administrador == true}" style="display: block; width:100%; text-align:center;" styleClass="pi pi-check"/>
+                    </p:column>
+                    <p:column headerText="Papeis" priority="5" style="width:20%;" sortBy="#{entity.nomesPapeisAtribuidos}"
+                              filterBy="#{entity.nomesPapeisAtribuidos}" filterMatchMode="contains" filterStyle="display:none">
+                        <h:outputText value="#{entity.nomesPapeisAtribuidos}"/>
+                    </p:column>
+                </x:list-datatable>
+            </h:form>
+        </sec:authorize>
+    </ui:define>
+
+</ui:composition>

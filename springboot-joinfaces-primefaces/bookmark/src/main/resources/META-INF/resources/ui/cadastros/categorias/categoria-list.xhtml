@@ -1,0 +1,32 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:x="http://java.sun.com/jsf/composite/components"
+                xmlns:sec="https://joinfaces.org/security"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="title">
+        Cadastros | Categorias
+    </ui:define>
+
+    <ui:define name="description">
+        A definição de uma categoria auxilia no processo de organização dos bookmarks em grupos comuns
+    </ui:define>
+
+    <ui:define name="implementation">
+        <sec:authorize access="hasRole('CATEGORIA_VISUALIZAR')">
+            <h:form>
+                <x:list-menu manager="#{categoriaListManager}" securityResource="CATEGORIA"/>
+                <x:list-datatable manager="#{categoriaListManager}">
+                    <p:column headerText="Nome" sortBy="#{entity.nome}" priority="1" style="width:100%"
+                              filterBy="#{entity.nome}" filterMatchMode="contains" filterStyle="display:none">
+                        <h:outputText value="#{entity.nome}"/>
+                    </p:column>
+                </x:list-datatable>
+            </h:form>
+        </sec:authorize>
+    </ui:define>
+
+</ui:composition>

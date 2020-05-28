@@ -1,2 +1,2 @@
-# Spring Framework Laboratory
-Space destined for applications samples and new studies related to the [Spring Framework (spring.io)](https://spring.io/).
+# Java Laboratory
+Space destined for applications samples and new studies related to the Java and yours frameworks.

@@ -1,0 +1,61 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:x="http://java.sun.com/jsf/composite/components"
+                xmlns:sec="https://joinfaces.org/security"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="title">
+        Segurança | Usuários
+    </ui:define>
+
+    <ui:define name="description">
+        A definição do usuário é necessária para o correto funcionamento do mecanismo de autenticação e autorização do
+        sistema
+    </ui:define>
+
+    <ui:define name="implementation">
+        <sec:authorize access="hasRole('USUARIO_VISUALIZAR')">
+            <h:form>
+                <x:edit-menu manager="#{usuarioEditManager}" securityResource="USUARIO"/>
+                <x:edit-content header="Cadastro de usuários">
+                    <h:panelGrid columns="4">
+                        <p:selectBooleanCheckbox id="usuarioAtivo" value="#{usuarioEditManager.entity.ativo}"/>
+                        <p:outputLabel value="Ativo" for="usuarioAtivo" style="padding-right: 25px;"/>
+
+                        <p:selectBooleanCheckbox id="usuarioAdministrador" value="#{usuarioEditManager.entity.administrador}"/>
+                        <p:outputLabel value="Administrador" for="usuarioAdministrador"/>
+                    </h:panelGrid>
+                    <h:panelGrid columns="1" style="width:100%;">
+                        <p:outputLabel value="Nome de usuário" for="usuarioUsername"/>
+                        <p:inputText id="usuarioUsername" value="#{usuarioEditManager.entity.username}" style="width:100%;"/>
+
+                        <p:outputLabel value="Nome completo" for="usuarioNome"/>
+                        <p:inputText id="usuarioNome" value="#{usuarioEditManager.entity.nome}" style="width:100%;"/>
+
+                        <p:outputLabel value="Senha" for="usuarioSenha"/>
+                        <p:password id="usuarioSenha" value="#{usuarioEditManager.password}" feedback="true"
+                                    promptLabel="Informe sua senha" weakLabel="Senha fraca"
+                                    goodLabel="Senha boa" strongLabel="Senha forte" style="width:100%;"/>
+
+                        <p:outputLabel value="Confirmação de senha" for="usuarioSenhaConfirmacao"/>
+                        <p:password id="usuarioSenhaConfirmacao" value="#{usuarioEditManager.passwordConfirmacao}"
+                                    feedback="true" promptLabel="Informe sua senha" weakLabel="Senha fraca"
+                                    goodLabel="Senha boa" strongLabel="Senha forte" style="width:100%;"/>
+
+                        <p:outputLabel value="E-mail" for="usuarioEmail"/>
+                        <p:inputText id="usuarioEmail" value="#{usuarioEditManager.entity.email}" style="width:100%;"/>
+                    </h:panelGrid>
+                    <h3>Selecione os papeis do usuário</h3>
+                    <p:selectManyCheckbox id="usuarioPapeis" layout="pageDirection" columns="1"
+                                          value="#{usuarioEditManager.entity.papeis}" collectionType="java.util.ArrayList">
+                        <f:selectItems value="#{usuarioEditManager.papeis}" var="papel" itemLabel="#{papel.nome}" itemValue="#{papel}"/>
+                    </p:selectManyCheckbox>
+                </x:edit-content>
+            </h:form>
+        </sec:authorize>
+    </ui:define>
+
+</ui:composition>

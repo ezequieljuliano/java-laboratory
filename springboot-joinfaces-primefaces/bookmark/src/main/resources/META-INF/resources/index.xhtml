@@ -1,0 +1,56 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="head">
+        <script type="text/javascript">
+            //<![CDATA[
+            $(document).ready(function() {
+                $('html').animate({
+                    scrollTop: 0
+                }, 1);
+                $('body').animate({
+                    scrollTop: 0
+                }, 1);
+            });
+
+            /* Scroll Animate */
+            $('.themes-btn').off('click').on('click', function() {
+                var target = $('#prime-themes');
+                if (target.length) {
+                    $('html, body').animate({
+                        scrollTop: target.offset().top - 70
+                    }, 500);
+                    return false;
+                }
+            });
+            //]]>
+        </script>
+    </ui:define>
+
+    <ui:define name="content">
+        <div class="homepage">
+            <div class="introduction">
+                <div class="introduction-header">
+                    <h1>Aplicação de exemplo Bookmark</h1>
+                    <p class="regular-header">Bem-vindo a aplicação de exemplo Bookmark. Este é seu ponto de partida, portanto sinta-se a vontade para modificar esta aplicação</p>
+                </div>
+
+                <p:button value="INICIAR" icon="fa fa-download" outcome="/get-started" />
+            </div>
+
+            <div class="why-primefaces">
+                <h2>Porque a aplicação Bookmark?</h2>
+                <p>A aplicação Bookmark é um projeto demo com Spring Boot, JoinFaces e Primefaces</p>
+            </div>
+
+            <div class="ui-g features">
+
+            </div>
+        </div>
+    </ui:define>
+
+</ui:composition>
