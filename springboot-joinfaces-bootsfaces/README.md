@@ -7,4 +7,4 @@ For the correct operation of this example application be aware:
 * Java 8  (or higher);
 * The database used is PostgreSQL (you must create the bookmark database);
 * The JoinFaces starter used is based on BootsFaces;
-* The IDE used in development was Netbeans 8.2.
+* The IDE used in development was Netbeans/IntelliJ IDEA.

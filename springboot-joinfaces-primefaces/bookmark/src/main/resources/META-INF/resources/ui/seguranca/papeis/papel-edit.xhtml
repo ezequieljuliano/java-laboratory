@@ -3,7 +3,7 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:p="http://primefaces.org/ui"
-                xmlns:x="http://java.sun.com/jsf/composite/components"
+                xmlns:x="http://bookmark.jsf/components"
                 xmlns:sec="https://joinfaces.org/security"
                 template="/WEB-INF/template.xhtml">
 
@@ -26,7 +26,8 @@
                     </h:panelGrid>
                     <h3>Selecione as permissões do papel</h3>
                     <p:selectManyCheckbox id="papelPermissoes" layout="pageDirection" columns="1"
-                                          value="#{papelEditManager.entity.permissoes}" collectionType="java.util.ArrayList">
+                                          value="#{papelEditManager.entity.permissoes}">
+                        <f:attribute name="collectionType" value="java.util.ArrayList"/>
                         <f:selectItems value="#{papelEditManager.permissoes}" var="permissao" itemLabel="#{permissao.descricao}" itemValue="#{permissao}"/>
                     </p:selectManyCheckbox>
                 </x:edit-content>

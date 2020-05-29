@@ -3,7 +3,7 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:p="http://primefaces.org/ui"
-                xmlns:x="http://java.sun.com/jsf/composite/components"
+                xmlns:x="http://bookmark.jsf/components"
                 xmlns:sec="https://joinfaces.org/security"
                 template="/WEB-INF/template.xhtml">
 
@@ -50,7 +50,8 @@
                     </h:panelGrid>
                     <h3>Selecione os papeis do usuário</h3>
                     <p:selectManyCheckbox id="usuarioPapeis" layout="pageDirection" columns="1"
-                                          value="#{usuarioEditManager.entity.papeis}" collectionType="java.util.ArrayList">
+                                          value="#{usuarioEditManager.entity.papeis}">
+                        <f:attribute name="collectionType" value="java.util.ArrayList"/>
                         <f:selectItems value="#{usuarioEditManager.papeis}" var="papel" itemLabel="#{papel.nome}" itemValue="#{papel}"/>
                     </p:selectManyCheckbox>
                 </x:edit-content>

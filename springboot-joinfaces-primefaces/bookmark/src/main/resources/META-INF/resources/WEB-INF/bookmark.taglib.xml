@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<facelet-taglib version="2.2"
+                xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facelettaglibrary_2_2.xsd">
+
+    <namespace>http://bookmark.jsf/components</namespace>
+
+    <tag>
+        <tag-name>edit-content</tag-name>
+        <component>
+            <resource-id>../resources/components/edit-content.xhtml</resource-id>
+        </component>
+    </tag>
+
+    <tag>
+        <tag-name>edit-menu</tag-name>
+        <component>
+            <resource-id>../resources/components/edit-menu.xhtml</resource-id>
+        </component>
+    </tag>
+    
+    <tag>
+        <tag-name>list-datatable</tag-name>
+        <component>
+            <resource-id>../resources/components/list-datatable.xhtml</resource-id>
+        </component>
+    </tag>
+    
+    <tag>
+        <tag-name>list-menu</tag-name>
+        <component>
+            <resource-id>../resources/components/list-menu.xhtml</resource-id>
+        </component>
+    </tag>
+
+</facelet-taglib>

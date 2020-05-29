@@ -1,4 +1,4 @@
-# Spring Boot and Thymeleaf With JAR Packaging
+# Spring Boot and Thymeleaf Templates Projects
 
 QuickStart Project for Spring Boot and [Thymeleaf](https://www.thymeleaf.org).
 
