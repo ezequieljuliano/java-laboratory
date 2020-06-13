@@ -50,7 +50,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin().loginPage("/login.jsf").permitAll()
                 .failureUrl("/login.jsf?error=true")
-                .defaultSuccessUrl("/index.jsf")
+                .defaultSuccessUrl("/index.jsf", true)                
                 .and()
                 .logout()
                 .logoutUrl("/logout")

@@ -8,7 +8,7 @@
                 template="/WEB-INF/template.xhtml">
 
     <ui:define name="title">
-        Segurança | Papeis
+        Segurança | Papéis
     </ui:define>
 
     <ui:define name="description">
@@ -19,7 +19,7 @@
         <sec:authorize access="hasRole('PAPEL_VISUALIZAR')">
             <h:form>
                 <x:edit-menu manager="#{papelEditManager}" securityResource="PAPEL"/>
-                <x:edit-content header="Cadastro de papeis">
+                <x:edit-content header="Cadastro de papéis">
                     <h:panelGrid columns="1" style="width:100%;">
                         <p:outputLabel value="Nome" for="papelNome"/>
                         <p:inputText id="papelNome" value="#{papelEditManager.entity.nome}" style="width:100%"/>
