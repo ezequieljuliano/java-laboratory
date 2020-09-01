@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:p="http://primefaces.org/ui"
+      xmlns:sec="https://joinfaces.org/security"
       xmlns:composite="http://java.sun.com/jsf/composite">
 
     <composite:interface>
@@ -9,8 +10,6 @@
     </composite:interface>
 
     <composite:implementation>
-        <p:growl showSummary="false" showDetail="true"/>
-
         <p:commandButton title="Adicionar" style="margin-right:5px;margin-top:3px;"
                          value="Adicionar" icon="fa fa-plus"
                          rendered="#{sec:areAnyGranted(cc.attrs.securityResource.concat('_INSERIR'))}"

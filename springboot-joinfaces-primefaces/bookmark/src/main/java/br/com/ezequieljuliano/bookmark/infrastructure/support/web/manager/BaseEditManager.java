@@ -60,7 +60,7 @@ public abstract class BaseEditManager<Entity, Service extends CrudService<Entity
             log.error(getClass().getName(), e);
             getMessageContext().add("Não foi possível salvar o registro: {0}", MessageSeverity.ERROR, e.getMessage());
         }
-        return "";
+        return null;
     }
 
     public String delete(Entity entity) {

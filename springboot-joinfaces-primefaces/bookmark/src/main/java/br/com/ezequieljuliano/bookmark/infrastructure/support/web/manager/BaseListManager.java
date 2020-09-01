@@ -40,7 +40,7 @@ public abstract class BaseListManager<Entity, Service extends CrudService<Entity
         if (id != null) {
             return getEditPageView().concat("&id=").concat(id.toString());
         }
-        return "";
+        return null;
     }
 
     public String delete(List<Entity> selectedEntities) {

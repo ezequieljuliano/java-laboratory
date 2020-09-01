@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui"
       xmlns:sec="https://joinfaces.org/security"
       xmlns:composite="http://java.sun.com/jsf/composite">
@@ -11,8 +10,6 @@
     </composite:interface>
 
     <composite:implementation>
-        <p:growl showSummary="false" showDetail="true"/>
-
         <p:commandButton title="Voltar para listagem" style="margin-right:5px;margin-top:3px;"
                          value="Voltar" icon="fa fa-arrow-left"
                          action="#{cc.attrs.manager.getListPageView()}" immediate="true"/>
@@ -23,11 +20,9 @@
                          action="#{cc.attrs.manager.insert}"/>
 
         <p:commandButton title="Salva o registro com todas as modificações realizadas" style="margin-right:5px;margin-top:3px;"
-                         value="Salvar" icon="fa fa-save" styleClass="btn-success"
+                         value="Salvar" icon="fa fa-save" styleClass="btn-success" process="@form" update="@form"
                          rendered="#{sec:areAnyGranted(cc.attrs.securityResource.concat('_INSERIR').concat(',').concat(cc.attrs.securityResource.concat('_EDITAR')))}"
-                         action="#{cc.attrs.manager.save(cc.attrs.manager.entity)}">
-            <f:ajax execute="@form" render="@form"/>
-        </p:commandButton>
+                         action="#{cc.attrs.manager.save(cc.attrs.manager.entity)}"/>
 
         <p:commandButton title="Excluir registro atual" style="margin-right:5px;margin-top:3px;"
                          value="Excluir" icon="fa fa-trash" styleClass="btn-danger"
