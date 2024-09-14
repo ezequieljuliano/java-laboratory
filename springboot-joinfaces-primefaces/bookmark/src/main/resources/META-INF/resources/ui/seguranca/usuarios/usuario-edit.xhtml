@@ -1,10 +1,10 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:ui="http://java.sun.com/jsf/facelets"
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:x="http://bookmark.jsf/components"
                 xmlns:sec="https://joinfaces.org/security"
+                xmlns="http://www.w3.org/1999/xhtml"
                 template="/WEB-INF/template.xhtml">
 
     <ui:define name="title">
@@ -25,12 +25,14 @@
                         <p:selectBooleanCheckbox id="usuarioAtivo" value="#{usuarioEditManager.entity.ativo}"/>
                         <p:outputLabel value="Ativo" for="usuarioAtivo" style="padding-right: 25px;"/>
 
-                        <p:selectBooleanCheckbox id="usuarioAdministrador" value="#{usuarioEditManager.entity.administrador}"/>
+                        <p:selectBooleanCheckbox id="usuarioAdministrador"
+                                                 value="#{usuarioEditManager.entity.administrador}"/>
                         <p:outputLabel value="Administrador" for="usuarioAdministrador"/>
                     </h:panelGrid>
                     <h:panelGrid columns="1" style="width:100%;">
                         <p:outputLabel value="Nome de usuário" for="usuarioUsername"/>
-                        <p:inputText id="usuarioUsername" value="#{usuarioEditManager.entity.username}" style="width:100%;"/>
+                        <p:inputText id="usuarioUsername" value="#{usuarioEditManager.entity.username}"
+                                     style="width:100%;"/>
 
                         <p:outputLabel value="Nome completo" for="usuarioNome"/>
                         <p:inputText id="usuarioNome" value="#{usuarioEditManager.entity.nome}" style="width:100%;"/>
@@ -52,7 +54,8 @@
                     <p:selectManyCheckbox id="usuarioPapeis" layout="pageDirection" columns="1"
                                           value="#{usuarioEditManager.entity.papeis}">
                         <f:attribute name="collectionType" value="java.util.ArrayList"/>
-                        <f:selectItems value="#{usuarioEditManager.papeis}" var="papel" itemLabel="#{papel.nome}" itemValue="#{papel}"/>
+                        <f:selectItems value="#{usuarioEditManager.papeis}" var="papel" itemLabel="#{papel.nome}"
+                                       itemValue="#{papel}"/>
                     </p:selectManyCheckbox>
                 </x:edit-content>
             </h:form>

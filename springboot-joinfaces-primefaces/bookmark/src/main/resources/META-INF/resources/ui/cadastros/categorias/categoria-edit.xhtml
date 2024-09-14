@@ -1,9 +1,9 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:ui="http://java.sun.com/jsf/facelets"
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:x="http://bookmark.jsf/components"
                 xmlns:sec="https://joinfaces.org/security"
+                xmlns="http://www.w3.org/1999/xhtml"
                 template="/WEB-INF/template.xhtml">
 
     <ui:define name="title">
@@ -21,7 +21,8 @@
                 <x:edit-content header="Cadastro de categoria">
                     <h:panelGrid columns="1" style="width:100%;">
                         <p:outputLabel value="Nome" for="categoriaNome"/>
-                        <p:inputText id="categoriaNome" value="#{categoriaEditManager.entity.nome}" style="width:100%;"/>
+                        <p:inputText id="categoriaNome" value="#{categoriaEditManager.entity.nome}"
+                                     style="width:100%;"/>
                     </h:panelGrid>
                 </x:edit-content>
             </h:form>

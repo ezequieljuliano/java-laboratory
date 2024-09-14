@@ -1,8 +1,6 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:f="http://java.sun.com/jsf/core"
-                xmlns:ui="http://java.sun.com/jsf/facelets"
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui"
+                xmlns="http://www.w3.org/1999/xhtml"
                 template="/WEB-INF/template.xhtml">
 
     <ui:define name="head">
@@ -36,10 +34,11 @@
             <div class="introduction">
                 <div class="introduction-header">
                     <h1>Aplicação de exemplo Bookmark</h1>
-                    <p class="regular-header">Bem-vindo a aplicação de exemplo Bookmark. Este é seu ponto de partida, portanto sinta-se a vontade para modificar esta aplicação</p>
+                    <p class="regular-header">Bem-vindo a aplicação de exemplo Bookmark. Este é seu ponto de partida,
+                        portanto sinta-se a vontade para modificar esta aplicação</p>
                 </div>
 
-                <p:button value="INICIAR" icon="fa fa-download" outcome="/get-started" />
+                <p:button value="INICIAR" icon="pi pi-download" outcome="/get-started"/>
             </div>
 
             <div class="why-primefaces">

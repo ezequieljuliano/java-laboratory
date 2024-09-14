@@ -1,8 +1,6 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:f="http://java.sun.com/jsf/core"
-                xmlns:ui="http://java.sun.com/jsf/facelets"
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui"
+                xmlns="http://www.w3.org/1999/xhtml"
                 template="/WEB-INF/template.xhtml">
 
     <ui:define name="content">
@@ -10,7 +8,7 @@
             <div class="layout-error-message-box">
                 <span class="layout-error-name">Error Occured</span>
                 <span class="layout-error-info">Something went wrong with the request.</span>
-                <p:button outcome="/index" value="Go to Homepage" class="secondary" />
+                <p:button outcome="/index" value="Go to Homepage" class="secondary"/>
             </div>
         </div>
     </ui:define>

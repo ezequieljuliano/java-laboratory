@@ -1,36 +1,37 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
+<html xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui"
+      xmlns="http://www.w3.org/1999/xhtml"
       lang="pt-br">
-    <h:head>
-        <f:facet name="first">
-            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-            <meta name="apple-mobile-web-app-capable" content="yes" />
-            <link href="#{resource['showcase/images/favicon-32x32.png']}" rel="icon" type="image/png" sizes="32x32" />
-            <link href="#{resource['showcase/images/favicon-16x16.png']}" rel="icon" type="image/png" sizes="16x16" />
-        </f:facet>
-        <title>Bookmark</title>
-        <h:outputStylesheet name="css/login.css" library="showcase" />
-    </h:head>
+<h:head>
+    <f:facet name="first">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+        <link href="#{resource['showcase/images/favicon-32x32.png']}" rel="icon" type="image/png" sizes="32x32"/>
+        <link href="#{resource['showcase/images/favicon-16x16.png']}" rel="icon" type="image/png" sizes="16x16"/>
+    </f:facet>
+    <title>Bookmark</title>
+    <h:outputStylesheet name="css/login.css" library="showcase"/>
+</h:head>
 
-    <h:body>
-        <div class="loginbox">
-            <img src="#{resource['showcase/images/login-avatar.png']}" class="avatar"/>
-            <h1>Autenticação</h1>
-            <h:form prependId="false">
-                <center>
-                    <p:outputLabel value="Ocorreu uma falha na autenticação, verifique o usuário e senha informados." rendered="${!empty param['error']}"/>
-                </center>
-                <p>Usuário</p>
-                <input type="text" id="username" name="username" placeholder="Informe seu usuário"/>
-                <p>Senha</p>
-                <input type="password" id="password" name="password" placeholder="Informe sua senha"/>
-                <input type="submit" id="submit" name="submit" value="Entrar"/>
-            </h:form>
-        </div>
-    </h:body>
+<h:body>
+    <div class="loginbox">
+        <img src="#{resource['showcase/images/login-avatar.png']}" class="avatar"/>
+        <h1>Autenticação</h1>
+        <h:form prependId="false">
+            <center>
+                <p:outputLabel value="Ocorreu uma falha na autenticação, verifique o usuário e senha informados."
+                               rendered="${!empty param['error']}"/>
+            </center>
+            <p>Usuário</p>
+            <input type="text" id="username" name="username" placeholder="Informe seu usuário"/>
+            <p>Senha</p>
+            <input type="password" id="password" name="password" placeholder="Informe sua senha"/>
+            <input type="submit" id="submit" name="submit" value="Entrar"/>
+        </h:form>
+    </div>
+</h:body>
 </html>

@@ -1,23 +1,22 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:f="http://java.sun.com/jsf/core"
+<ui:composition xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:sec="https://joinfaces.org/security"
-                xmlns:p="http://primefaces.org/ui">
+                xmlns:p="http://primefaces.org/ui"
+                xmlns="http://www.w3.org/1999/xhtml">
 
     <div class="layout-sidebar">
         <div class="nano">
             <div class="nano-content menu-scroll-content">
                 <div class="search-input">
                     <i class="pi pi-search icon-search"/>
-                    <input type="text"/>
+                    <input type="text" placeholder="Busque por nome..."/>
                 </div>
 
                 <ul id="layout-menu" class="layout-menu">
                     <sec:authorize access="hasAnyRole('CATEGORIA_VISUALIZAR', 'BOOKMARK_VISUALIZAR')">
                         <li id="submenu-cadastros">
                             <a href="#">
-                                <p:graphicImage name="images/icons/file.svg" library="showcase" />
+                                <p:graphicImage name="images/icons/file.svg" library="showcase"/>
                                 <span>Cadastros</span>
                             </a>
                             <div>
@@ -48,7 +47,7 @@
                     <sec:authorize access="hasAnyRole('USUARIO_VISUALIZAR', 'PAPEL_VISUALIZAR')">
                         <li id="submenu-seguranca">
                             <a href="#">
-                                <p:graphicImage name="images/icons/file.svg" library="showcase" />
+                                <p:graphicImage name="images/icons/file.svg" library="showcase"/>
                                 <span>Segurança</span>
                             </a>
                             <div>

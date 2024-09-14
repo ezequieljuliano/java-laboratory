@@ -1,0 +1,16 @@
+services:
+  bookmark_postgres:
+    image: postgres:16
+    container_name: bookmark_postgres
+    restart: always
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_DB: bookmark
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - bookmark_postgres_data:/var/lib/postgresql/data
+
+volumes:
+  bookmark_postgres_data:

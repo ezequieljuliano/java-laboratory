@@ -1,9 +1,9 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:ui="http://java.sun.com/jsf/facelets"
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:x="http://bookmark.jsf/components"
                 xmlns:sec="https://joinfaces.org/security"
+                xmlns="http://www.w3.org/1999/xhtml"
                 template="/WEB-INF/template.xhtml">
 
     <ui:define name="title">
@@ -11,7 +11,8 @@
     </ui:define>
 
     <ui:define name="description">
-        A definição do papel de segurança é um passo fundamental e tem o intuito de caracterizar a função do usuário no sistema
+        A definição do papel de segurança é um passo fundamental e tem o intuito de caracterizar a função do usuário no
+        sistema
     </ui:define>
 
     <ui:define name="implementation">
@@ -20,7 +21,8 @@
                 <x:list-menu manager="#{papelListManager}" securityResource="PAPEL"/>
                 <x:list-datatable manager="#{papelListManager}">
                     <p:column headerText="Nome" priority="1" style="width:100%"
-                              sortBy="#{entity.nome}" filterBy="#{entity.nome}" filterMatchMode="contains" filterStyle="display:none">
+                              sortBy="#{entity.nome}" filterBy="#{entity.nome}" filterMatchMode="contains"
+                              filterStyle="display:none">
                         <h:outputText value="#{entity.nome}"/>
                     </p:column>
                 </x:list-datatable>

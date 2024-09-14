@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:composite="http://java.sun.com/jsf/composite">
+<html xmlns:p="http://primefaces.org/ui"
+      xmlns:composite="http://java.sun.com/jsf/composite"
+      xmlns="http://www.w3.org/1999/xhtml">
 
-    <composite:interface>
-        <composite:attribute name="header" required="true"/>
-    </composite:interface>
+<composite:interface>
+    <composite:attribute name="header" required="true"/>
+</composite:interface>
 
-    <composite:implementation>
-        <p:messages id="messages" showSummary="false" showDetail="true" closable="true" style="margin-top:10px;">
-            <p:autoUpdate />
-        </p:messages>
-        <p:panel header="#{cc.attrs.header}" style="margin-top:10px;">
-            <composite:insertChildren/>
-        </p:panel>
-    </composite:implementation>
+<composite:implementation>
+    <p:messages id="messages" showSummary="false" showDetail="true" closable="true" style="margin-top:10px;">
+        <p:autoUpdate/>
+    </p:messages>
+    <p:panel header="#{cc.attrs.header}" style="margin-top:10px;">
+        <composite:insertChildren/>
+    </p:panel>
+</composite:implementation>
 
 </html>
